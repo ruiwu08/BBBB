@@ -24,6 +24,7 @@ function makeUpgrades(game) {
 function renderGame(game) {
     //Renders the DOM with the game state info.
     $("lines");
+    $("lines");
 }
 
 function updateGame(game) {
