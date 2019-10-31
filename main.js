@@ -9,7 +9,6 @@ function main() {
     updateGame(game);
     console.log("BREAK");
     // $("#Button").click(game.onClick);
-    
     // $("#Button").click(updateGame(game));
     window.setInterval(function() {
         game.onTick(game);
