@@ -16,7 +16,7 @@ export default class Game {
     }
 
     buyUpgrade(upgrade) {
-        if (upgrade.count <= upgrade.maxPurchases) {
+        if ((upgrade.count <= upgrade.maxPurchases) && (this.IQ >= upgrade.unlockIQ)){
             this.lines = this.lines - upgrade.cost;
             upgrade.increaseCount();
         }
