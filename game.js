@@ -16,9 +16,12 @@ export default class Game {
     }
 
     buyUpgrade(upgrade) {
-        if ((upgrade.count <= upgrade.maxPurchases) && (this.IQ >= upgrade.unlockIQ)){
+        if ((upgrade.count <= upgrade.maxPurchases) && (this.IQ >= upgrade.unlockIQ) && (this.lines > upgrade.cost)){
             this.lines = this.lines - upgrade.cost;
+            console.log("YOU BOUGHT THE UPGRADE FOR " + upgrade.cost + " LINES");
             upgrade.increaseCount();
+        } else {
+            console.log("YOU TOO POOR OR SOMETHING");
         }
         // Add something that happens if max purchases have been reached
     }

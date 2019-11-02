@@ -43,6 +43,7 @@ export default class Upgrade {
     getCount() {return this.count};
     getUnlockIQ() {return this.unlockIQ};
     getType() {return this.type};
+    getDescription() {return this.description;}
 
     increaseCount() {
         if (this.count <= this.maxPurchases) {
