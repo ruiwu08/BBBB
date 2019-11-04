@@ -8,6 +8,7 @@ export default class Game {
         this.lines = 0;
         this.IQ = 0;
         this.upgrades = [];
+        this.lps = 0;
         this.class = "DEFAULT"; //Add class functionality later.
     }
 
@@ -64,6 +65,7 @@ export default class Game {
         }
         this.lines = this.lines + (tickAmount * tickMultiplier * allMultiplier);
         this.IQ = this.IQ + (tickAmount * tickMultiplier * allMultiplier)/1000;
+        this.lps = (tickAmount * tickMultiplier * allMultiplier) * 10;
     }
 
     onClick() {

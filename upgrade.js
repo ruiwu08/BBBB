@@ -10,6 +10,7 @@ export default class Upgrade {
         this.multiplier = 1;
         this.increase = function (count) {return count};
         this.image = "";
+        this.info = "";
         this.description = "";
     }
 
@@ -22,6 +23,7 @@ export default class Upgrade {
     setMultiplier(multiplier) {this.multipler = multiplier};
     setIncrease(increase) {this.increase = increase};
     setDescription(description) {this.description = description};
+    setInfo(info) {this.info = info};
     setType(type) {
         switch(type) {
             case 'TICK': 
@@ -54,7 +56,6 @@ export default class Upgrade {
 
     increment() {
         let a = this.multiplier * this.increase(this.count);
-        // console.log(this.multiplier * this.increase(this.count));
         return a;
     }
 
