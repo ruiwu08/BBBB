@@ -50,7 +50,13 @@ function renderGame(game) {
 
         let box = $("<div>");
         box.attr("id", upgrade.name);
+        box.addClass("upgradeBox");
         box.text(upgrade.name + ": \n");
+
+        let info = $("<p>");
+        info.attr("id", upgrade.name + "_info");
+        info.text(upgrade.info)
+        box.append(info);
 
         let count = $("<p>");
         count.attr("id", upgrade.name + "_count");
@@ -70,18 +76,23 @@ function renderGame(game) {
 
         let cost = $("<p>");
         cost.attr("id", upgrade.name + "_cost");
-        cost.addClass("tooltip");
         box.append(cost);
+
+        let img_box = $('<div>');
+        img_box.attr("id", upgrade.name + "_img_box");
+        img_box.addClass("tooltip");
+        box.append(img_box);
 
         let desc = $("<p>");
         desc.attr("id", upgrade.name + "_desc");
+        desc.addClass("tooltiptext");
         desc.text(upgrade.description);
-        box.append(desc);
+        img_box.append(desc);
 
         let img = $('<img>');
         img.attr("id", upgrade.name + "_img");
         img.attr("src", upgrade.image);
-        box.append(img);
+        img_box.append(img);
 
         $("#upgrade_container").append(box);
     }
