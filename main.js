@@ -32,6 +32,14 @@ function makeUpgrades(game) {
     keyboard.setInfo("Each click generates 1 more line");
     keyboard.setImage("images/keyboard.png");
     game.addUpgrade(keyboard);
+
+    let SFGTC = new Upgrade('Smart Friend who goes to class', 100, 2, 1, 'TICK_PER');
+    SFGTC.setCostIncrementer(function (cost) {return cost * 10});
+    SFGTC.setIncrease(function(count) {return count});
+    SFGTC.setDescription("A smart friend who goes to class is an inspiration to all. Even without writing code for you, their presence alone motivates your friends to work harder.");
+    SFGTC.setInfo("Passive income is increased by 100%.");
+    SFGTC.setImage("images/SFGTC.jpg");
+    game.addUpgrade(SFGTC);
 }
 
 function renderGame(game) {
@@ -49,48 +57,48 @@ function renderGame(game) {
         let upgrade = game.upgrades[i];
 
         let box = $("<div>");
-        box.attr("id", upgrade.name);
+        box.attr("id", i);
         box.addClass("upgradeBox");
         box.text(upgrade.name + ": \n");
 
         let info = $("<p>");
-        info.attr("id", upgrade.name + "_info");
+        info.attr("id", i + "_info");
         info.text(upgrade.info)
         box.append(info);
 
         let count = $("<p>");
-        count.attr("id", upgrade.name + "_count");
+        count.attr("id", i + "_count");
         box.append(count);
 
         let max = $("<p>");
-        max.attr("id", upgrade.name + "_max");
+        max.attr("id", i + "_max");
         box.append(max);
 
         let buyButton = $('<button/>', {
             text: 'Buy',
-            id: upgrade.name + "_buyButton",
+            id: i + "_buyButton",
             click: function () {game.buyUpgrade(upgrade)}
         });
         box.append(buyButton);
         box.append("<br/>")
 
         let cost = $("<p>");
-        cost.attr("id", upgrade.name + "_cost");
+        cost.attr("id", i + "_cost");
         box.append(cost);
 
         let img_box = $('<div>');
-        img_box.attr("id", upgrade.name + "_img_box");
+        img_box.attr("id", i + "_img_box");
         img_box.addClass("tooltip");
         box.append(img_box);
 
         let desc = $("<p>");
-        desc.attr("id", upgrade.name + "_desc");
+        desc.attr("id", i + "_desc");
         desc.addClass("tooltiptext");
         desc.text(upgrade.description);
         img_box.append(desc);
 
         let img = $('<img>');
-        img.attr("id", upgrade.name + "_img");
+        img.attr("id", i + "_img");
         img.attr("src", upgrade.image);
         img_box.append(img);
 
@@ -111,9 +119,9 @@ function updateGame(game) {
 function updateUpgrades(game) {
     for(let i = 0; i < game.upgrades.length; i++) {
         let upgrade = game.upgrades[i];
-        $(`#${upgrade.name}_count`).text("Amount: " + upgrade.count + '\n');
-        $(`#${upgrade.name}_max`).text("Max Purchases: " + upgrade.maxPurchases + '\n');
-        $(`#${upgrade.name}_cost`).text("Upgrade Cost: " + upgrade.cost.toFixed(0) + '\n');
+        $(`#${i}_count`).text("Amount: " + upgrade.count + '\n');
+        $(`#${i}_max`).text("Max Purchases: " + upgrade.maxPurchases + '\n');
+        $(`#${i}_cost`).text("Upgrade Cost: " + upgrade.cost.toFixed(0) + '\n');
     }
 }
 

@@ -30,12 +30,18 @@ export default class Upgrade {
                 this.type = 'TICK';
             case 'CLICK':
                 this.type = 'CLICK';
+            case 'TICK_PER':
+                this.type = 'TICK_PER';
+            case 'CLICK_PER':
+                this.type = 'CLICK_PER';
             case 'TICK_MULT':
                 this.type = 'TICK_MULT';
             case 'CLICK_MULT':
                 this.type = 'CLICK_MULT';
             case 'ALL_MULT':
                 this.type = 'ALL_MULT';
+            case 'All_PER':
+                this.type = 'ALL_PER';
         }
     }
     setImage(image) {this.image = image};

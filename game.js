@@ -17,7 +17,7 @@ export default class Game {
     }
 
     buyUpgrade(upgrade) {
-        if ((upgrade.count <= upgrade.maxPurchases) && (this.IQ >= upgrade.unlockIQ) && (this.lines > upgrade.cost)){
+        if ((upgrade.count < upgrade.maxPurchases) && (this.IQ >= upgrade.unlockIQ) && (this.lines > upgrade.cost)){
             this.lines = this.lines - upgrade.cost;
             console.log("YOU BOUGHT THE UPGRADE FOR " + upgrade.cost + " LINES");
             upgrade.increaseCount();
@@ -50,43 +50,58 @@ export default class Game {
         // tickMultipler stacks additively, allMultiplier stacks multiplicatively.
         let tickAmount = 0;
         let tickMultiplier = 1;
+        let tickPercentage = 1;
+        let allPercentage = 1;
         let allMultiplier = 1;
         for (let i = 0; i < this.upgrades.length; i++) {
             let theUpgrade = this.upgrades[i];
             if (theUpgrade.type == 'TICK') {
                 tickAmount = tickAmount + theUpgrade.increment();
             }
+            if (theUpgrade.type == 'TICK_PER') {
+                tickPercentage = tickPercentage + theUpgrade.increment();
+            }
             if (theUpgrade.type == 'TICK_MULT') {
-                tickMultiplier = tickMultiplier + theUpgrade.increment();
+                tickMultiplier = tickMultiplier * theUpgrade.increment();
+            }
+            if (theUpgrade.type == 'ALL_PER') {
+                allPercentage = allPercentage + theUpgrade.increment();
             }
             if (theUpgrade.type == 'ALL_MULT') {
                 allMultiplier = allMultiplier * theUpgrade.increment();
             }
         }
-        this.lines = this.lines + (tickAmount * tickMultiplier * allMultiplier);
-        this.IQ = this.IQ + (tickAmount * tickMultiplier * allMultiplier)/1000;
-        this.lps = (tickAmount * tickMultiplier * allMultiplier) * 10;
+        this.lines = this.lines + (tickAmount * tickMultiplier * tickPercentage * allPercentage * allMultiplier);
+        this.IQ = this.IQ + (tickAmount * tickMultiplier * tickPercentage * allPercentage * allMultiplier)/1000;
+        this.lps = (tickAmount * tickMultiplier * tickPercentage * allPercentage * allMultiplier) * 10;
     }
 
     onClick() {
         let clickAmount = 1;
+        let clickPercentage = 1;
         let clickMultiplier = 1;
         let allMultiplier = 1;
-        console.log("CLICK");
+        let allPercentage = 1;
         for (let i = 0; i < this.upgrades.length; i++) {
             let theUpgrade = this.upgrades[i];
             if (theUpgrade.type == 'CLICK') {
                 clickAmount = clickAmount + theUpgrade.increment();
             }
+            if (theUpgrade.type == 'CLICK_PER') {
+                clickPercentage = clickPercentage + theUpgrade.increment();
+            }
             if (theUpgrade.type == 'CLICK_MULT') {
-                clickMultiplier = clickMultiplier + theUpgrade.increment();
+                clickMultiplier = clickMultiplier * theUpgrade.increment();
+            }
+            if (theUpgrade.type == 'ALL_PER') {
+                allPercentage = allPercentage + theUpgrade.increment();
             }
             if (theUpgrade.type == 'ALL_MULT') {
                 allMultiplier = allMultiplier * theUpgrade.increment();
             }
         }
-        this.lines = this.lines + (clickAmount * clickMultiplier * allMultiplier);
-        this.IQ = this.IQ + (clickAmount * clickMultiplier * allMultiplier)/1000;
+        this.lines = this.lines + (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier);
+        this.IQ = this.IQ + (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier)/1000;
     }
 
 }
