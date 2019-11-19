@@ -4,17 +4,34 @@
         <link rel = "stylesheet" href = "style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="node_modules/bulma/css/bulma.css">
+        <link rel = "stylesheet" href="node_modules/bulma/css/bulma.css">
     </head>
-    <body>
-        <div id="default_container" class="row">
-            <div>
-                <p id="lines">Lines: 0</p>
-                <p id="lps">Lines per second: 0</p>
-                <p id="IQ">IQ: 0</p>
+    <body id="body">
+        <div class="row">
+            <div id="default_container" class="column">
+                <div id="class_container">
+                    <p id="class_title"></p>
+                    <div class='tooltip'>
+                        <img id="teacher_pic">
+                        <p id='teacher_text' class='tooltiptext'></p>
+                    </div>
+                    <p id="teacher_title"></p>
+                    <p id="class_description"></p>
+                    <button id="pass_button">I'm smart enough to pass!</button>
+                    <p id="IQ_to_pass"></p>
+                </div>
+                <div id="player_container">
+                    <img id="coder">
+                    <p id="lines">Lines: 0</p>
+                    <p id="lps">Lines per second: 0</p>
+                    <p id="IQ">IQ: 0</p>
+                </div>
+            </div>
+            <div class="column">
+                <p id="upgrade_title">Upgrades</p>
+                <div id="upgrade_container"></div>
             </div>
         </div>
-        <div id="upgrade_container"></div>
         <script type="module" src="node_modules/jquery/dist/jquery.js"></script>
         <script type="module" src="main.js"></script>
     </body>

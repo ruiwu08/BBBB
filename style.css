@@ -1,3 +1,10 @@
+
+
+
+#default_container{
+  text-align: center;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -5,11 +12,12 @@
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 200px;
   background-color: white;
   color: black;
-  text-align: center;
+  text-align: left;
   border-radius: 6px;
+  border: solid;
   padding: 5px 0;
 
   /* Position the tooltip */
@@ -21,14 +29,57 @@
   visibility: visible;
 }
 
+#upgrade_title {
+  font-size: 36px;
+  font-weight: bold;
+  color: darkcyan;
+  text-align: center;
+  height: 60px;
+  border: 2px solid yellowgreen;
+}
+
+.upgrade_name {
+  font-size: 24px;
+  font-weight: bold;
+  color: lightseagreen
+}
+
+.upgrade_info {
+  font-size: 16px;
+  font-weight: light;
+  color: lightseagreen;
+}
+
 .upgradeBox {
   border: 2px solid yellowgreen;
   padding: 2px 0;
 }
 
 #upgrade_container {
-  overflow: auto;
+  overflow-y: auto;
   float: left;
-  height: 383px;
-  width: 750px;
+  height: calc(100vh - 50px);
+  width: 100%;
+}
+
+#class_container {
+  border: 2px solid blueviolet;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+#pass_button {
+  visibility: hidden;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -24,6 +24,13 @@ export default class Upgrade {
     setIncrease(increase) {this.increase = increase};
     setDescription(description) {this.description = description};
     setInfo(info) {this.info = info};
+
+    //NOTE: ALL MULTIPLIER UPGRADES SHOULD BE ONE TIME PURCHASES. 
+    //              *(This does NOT apply to percentage upgrades)
+    //      If you want another multiplier upgrade, add a new upgrade box that does the same thing.
+    //      This is due to a bug that I can't figure out, but also lines up well in increasing upgrade diversity.
+    //      It's not a bug, it's a feature!
+
     setType(type) {
         switch(type) {
             case 'TICK': 
@@ -34,7 +41,7 @@ export default class Upgrade {
                 this.type = 'TICK_PER';
             case 'CLICK_PER':
                 this.type = 'CLICK_PER';
-            case 'TICK_MULT':
+            case 'TICK_MULT': 
                 this.type = 'TICK_MULT';
             case 'CLICK_MULT':
                 this.type = 'CLICK_MULT';
