@@ -30,7 +30,7 @@ function makeUpgrades(game) {
     friend.setCostIncrementer(function (cost) {return cost ** 1.06});
     friend.setIncrease(function (count) {return count * 0.02});
     friend.setDescription("A friend who will share you their code, provided you share some of yours first. What's an honor code anyways?");
-    friend.setInfo("Adds 1 line of code every 5 seconds");
+    friend.setInfo("Adds 0.2 line of code every second.");
     friend.setImage("images/friend.jpg");
     game.addUpgrade(friend);
 
@@ -46,7 +46,7 @@ function makeUpgrades(game) {
     fourFunction.setCostIncrementer(function (cost) {return cost ** 1.05});
     fourFunction.setIncrease(function (count) {return count * 0.2});
     fourFunction.setDescription("The only reason they make these are for those teachers that think you'll cheat using a TI-84.");
-    fourFunction.setInfo("Passive income is increased by 20% for each four function calculator");
+    fourFunction.setInfo("Passive income is increased by 20% for each Four Function Calculator");
     fourFunction.setImage("images/four_function.jpg");
     game.addUpgrade(fourFunction);
 
@@ -66,7 +66,23 @@ function makeUpgrades(game) {
     coffee.setImage("images/coffee.jpg");
     game.addUpgrade(coffee);
 
-    let SFGTC = new Upgrade('Smart Friend who goes to class', 1000, 1, 1, 'TICK_MULT');
+    let cheggAcc = new Upgrade('Chegg Account', 2000, 5, 4, 'TICK_PER');
+    cheggAcc.setCostIncrementer(function (cost) {return (cost * 1.2) ** 1.05});
+    cheggAcc.setIncrease(function (count) {return count * 0.4});
+    cheggAcc.setDescription("These Chegg accounts have been passed down from generation to generation. Treasure these login credentials like the antiques they are.");
+    cheggAcc.setInfo("Passive income is increase by 40% for each Chegg Account");
+    cheggAcc.setImage("images/chegg.png");
+    game.addUpgrade(cheggAcc);
+
+    let smartFriend = new Upgrade('Smart Friend', 1000, 15, 5, 'TICK');
+    smartFriend.setCostIncrementer(function (cost) {return (cost * 1.1) ** 1.02});
+    smartFriend.setIncrease(function (count) {return count * 0.1});
+    smartFriend.setDescription("Without these guys, you're GPA would be so much lower. Take a moment to thank your local smart friend, they'd probably appreciate it.");
+    smartFriend.setInfo("Adds 1 lines of code every seconds.");
+    smartFriend.setImage("images/smart_friend.png");
+    game.addUpgrade(smartFriend);
+
+    let SFGTC = new Upgrade('Smart Friend who goes to class', 50000, 1, 8, 'TICK_MULT');
     SFGTC.setCostIncrementer(function (cost) {return cost});
     SFGTC.setIncrease(function(count) {return 1 + count});
     SFGTC.setDescription("There's no way someone smart and motivated are willing to give you their code, but their presence motivates everyone to work harder nonetheless.");
