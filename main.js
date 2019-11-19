@@ -50,7 +50,7 @@ function makeUpgrades(game) {
     fourFunction.setImage("images/four_function.jpg");
     game.addUpgrade(fourFunction);
 
-    let mechKeyboard = new Upgrade('Mechanical Keyboard', 250, 10, 1, 'CLICK');
+    let mechKeyboard = new Upgrade('Mechanical Keyboard', 250, 15, 1, 'CLICK');
     mechKeyboard.setCostIncrementer(function (cost) {return (cost - 50) * 1.5});
     mechKeyboard.setIncrease(function (count) {return count * 5});
     mechKeyboard.setDescription("Clickity-clack, your code is whack");
@@ -67,7 +67,7 @@ function makeUpgrades(game) {
     game.addUpgrade(coffee);
 
     let cheggAcc = new Upgrade('Chegg Account', 2000, 5, 4, 'TICK_PER');
-    cheggAcc.setCostIncrementer(function (cost) {return (cost * 1.2) ** 1.05});
+    cheggAcc.setCostIncrementer(function (cost) {return (cost * 1.2) ** 1.06});
     cheggAcc.setIncrease(function (count) {return count * 0.4});
     cheggAcc.setDescription("These Chegg accounts have been passed down from generation to generation. Treasure these login credentials like the antiques they are.");
     cheggAcc.setInfo("Passive income is increase by 40% for each Chegg Account");
@@ -82,6 +82,14 @@ function makeUpgrades(game) {
     smartFriend.setImage("images/smart_friend.png");
     game.addUpgrade(smartFriend);
 
+    let elemPC = new Upgrade('Elementary School PC', 2500, 20, 8, 'TICK_PER');
+    elemPC.setCostIncrementer(function (cost) {return cost * 1.3});
+    elemPC.setIncrease(function(count) {return count * 0.25});
+    elemPC.setDescription("The only things these bricks can run is Windows XP.");
+    elemPC.setInfo("Passive income is increased by 25% for each Elementary School PC");
+    elemPC.setImage("images/elem_school_pc.jpg");
+    game.addUpgrade(elemPC);
+
     let SFGTC = new Upgrade('Smart Friend who goes to class', 50000, 1, 8, 'TICK_MULT');
     SFGTC.setCostIncrementer(function (cost) {return cost});
     SFGTC.setIncrease(function(count) {return 1 + count});
@@ -89,6 +97,14 @@ function makeUpgrades(game) {
     SFGTC.setInfo("Double your passive income");
     SFGTC.setImage("images/SFGTC.jpg");
     game.addUpgrade(SFGTC);
+
+    let typewriter = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/typewriter.jpg");
+    game.addUpgrade(typewriter);
 }
 
 function renderUpgrades(game) {
@@ -98,6 +114,7 @@ function renderUpgrades(game) {
         let box = $("<div>");
         box.attr("id", i);
         box.addClass("upgradeBox");
+        box.css("display", "none");
 
         let name = $("<h1>");
         name.text(upgrade.name + ": \n");
@@ -252,9 +269,9 @@ function renderGame(game) {
 function updateGame(game) {
     //Updates the DOM with the game state info.
     //*May be redundant with renderGame function. Design is dependent on front-end team.
-    $("#lines").text("Lines: " + game.lines.toFixed(1));
-    $('#IQ').text("IQ: " + game.IQ.toFixed(3));
-    $("#lps").text("Lines per second: " + game.lps.toFixed(1));
+    $("#lines").text("Lines: " + prettify(game.lines));
+    $('#IQ').text("IQ: " + prettify(game.IQ));
+    $("#lps").text("Lines per second: " + prettify(game.lps));
     if (game.IQ >= game.IQtoPass) {
         $('#pass_button').css('visibility', 'visible');
     }
@@ -264,12 +281,16 @@ function updateGame(game) {
 function updateUpgrades(game) {
     for(let i = 0; i < game.upgrades.length; i++) {
         let upgrade = game.upgrades[i];
+        //Makes upgrade visible only if UnlockIQ is met.
+        if (game.IQ >= upgrade.unlockIQ) {
+            $(`#${i}`).css("display", "block");
+        }
         $(`#${i}_count`).text("Amount: " + upgrade.count + '\n');
         $(`#${i}_max`).text("Max Purchases: " + upgrade.maxPurchases + '\n');
         if (upgrade.count == upgrade.maxPurchases) {
             $(`#${i}_cost`).text("Can't buy any more!");
         } else {
-            $(`#${i}_cost`).text("Upgrade Cost: " + upgrade.cost.toFixed(0) + '\n');
+            $(`#${i}_cost`).text("Upgrade Cost: " + prettify(upgrade.cost) + '\n');
         }
     }
 }
@@ -278,6 +299,24 @@ function resetUpgradeContainer() {
     const myNode = document.getElementById('upgrade_container');
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
+    }
+}
+
+function prettify(num) {
+    if (num < 10 ** 6) {
+        return num.toFixed(0);
+    } else if (num >= 10 ** 6 && num < 10 ** 9) {
+        return (num / (10 ** 6)).toFixed(1) + " million";
+    } else if (num >= 10 ** 9 && num < 10 ** 12) {
+        return (num / (10 ** 9)).toFixed(1) + " billion";
+    } else if(num >= 10 ** 12 && num < 10 ** 15) {
+        return (num / (10 ** 12)).toFixed(1) + " trillion";
+    } else if(num >= 10 ** 15 && num < 10 ** 18) {
+        return (num / (10 ** 15)).toFixed(1) + " quadrillion";
+    } else if(num >= 10 ** 18 && num < 10 ** 21) {
+        return (num / (10 ** 18)).toFixed(1) + " quintillion";
+    } else {
+        return num;
     }
 }
 
