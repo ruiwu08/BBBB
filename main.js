@@ -1,112 +1,38 @@
 import Game from './game.js';
 import Upgrade from './upgrade.js';
+import Cutscene from './cutscene.js';
+import makeUpgrades from './make_upgrades.js';
+import makeCutscenes from './make_cutscenes.js';
 
 
 let preRendered = false;
+let showingCutscene = false;
 
 function main() {
+    // Implement later so gamestates can be saved:
+    // if (new game) {
+    //     make upgrades
+    // } else {
+    //     dont make upgrades just render Upgrades
+    // }
     let game = new Game('user', 'password');
     makeUpgrades(game);
+    makeCutscenes(game);
     renderGame(game);
+
     updateGame(game);
     updateUpgrades(game);
     window.setInterval(function() {
         game.onTick(game);
         updateGame(game);
         updateUpgrades(game);
-    }, 100)
+        updateCutscenes(game);
+    }, 100);
 }
 
-function makeUpgrades(game) {
-    let devUpgrade = new Upgrade('Devupgrade', 0, 50, 0, 'TICK');
-    devUpgrade.setCostIncrementer(function(cost) {return cost});
-    devUpgrade.setIncrease(function(count) {return count * 10000000});
-    devUpgrade.setDescription("For development. Delete in final product");
-    devUpgrade.setInfo("For development. Delete in final product");
-    devUpgrade.setImage("images/head_slam.jpg");
-    game.addUpgrade(devUpgrade);
 
-    let friend = new Upgrade('Friend', 10, 20, 0, 'TICK');
-    friend.setCostIncrementer(function (cost) {return cost ** 1.06});
-    friend.setIncrease(function (count) {return count * 0.02});
-    friend.setDescription("A friend who will share you their code, provided you share some of yours first. What's an honor code anyways?");
-    friend.setInfo("Adds 0.2 line of code every second.");
-    friend.setImage("images/friend.jpg");
-    game.addUpgrade(friend);
-
-    let keyboard = new Upgrade('Keyboard', 20, 10, 0, 'CLICK');
-    keyboard.setCostIncrementer(function (cost) {return cost * 1.2 + 4});
-    keyboard.setIncrease(function (count) {return count});
-    keyboard.setDescription("More keyboards means more typing, more typing means more lines of code. More lines of code means more IQ. More IQ means you pass the class! <br/><br/>Don't question how this game works.");
-    keyboard.setInfo("Each click generates 1 more line");
-    keyboard.setImage("images/keyboard.png");
-    game.addUpgrade(keyboard);
-
-    let fourFunction = new Upgrade('Four Function Calculator', 100, 10, 0.5, 'TICK_PER');
-    fourFunction.setCostIncrementer(function (cost) {return cost ** 1.05});
-    fourFunction.setIncrease(function (count) {return count * 0.2});
-    fourFunction.setDescription("The only reason they make these are for those teachers that think you'll cheat using a TI-84.");
-    fourFunction.setInfo("Passive income is increased by 20% for each Four Function Calculator");
-    fourFunction.setImage("images/four_function.jpg");
-    game.addUpgrade(fourFunction);
-
-    let mechKeyboard = new Upgrade('Mechanical Keyboard', 250, 15, 1, 'CLICK');
-    mechKeyboard.setCostIncrementer(function (cost) {return (cost - 50) * 1.5});
-    mechKeyboard.setIncrease(function (count) {return count * 5});
-    mechKeyboard.setDescription("Clickity-clack, your code is whack");
-    mechKeyboard.setInfo("Each click generates 5 more lines");
-    mechKeyboard.setImage("images/mechanical_keyboard.jpg");
-    game.addUpgrade(mechKeyboard);
-
-    let coffee = new Upgrade('Coffee', 500, 8, 2, 'CLICK_PER');
-    coffee.setCostIncrementer(function (cost) {return cost * 1.35});
-    coffee.setIncrease(function (count) {return count * 0.25});
-    coffee.setDescription("Hey barista, this coffee tastes like dirt! <br/><br/> I'm not surprised, it was ground this morning.");
-    coffee.setInfo("Each click generates 25% more lines");
-    coffee.setImage("images/coffee.jpg");
-    game.addUpgrade(coffee);
-
-    let cheggAcc = new Upgrade('Chegg Account', 2000, 5, 4, 'TICK_PER');
-    cheggAcc.setCostIncrementer(function (cost) {return (cost * 1.2) ** 1.06});
-    cheggAcc.setIncrease(function (count) {return count * 0.4});
-    cheggAcc.setDescription("These Chegg accounts have been passed down from generation to generation. Treasure these login credentials like the antiques they are.");
-    cheggAcc.setInfo("Passive income is increase by 40% for each Chegg Account");
-    cheggAcc.setImage("images/chegg.png");
-    game.addUpgrade(cheggAcc);
-
-    let smartFriend = new Upgrade('Smart Friend', 1000, 15, 5, 'TICK');
-    smartFriend.setCostIncrementer(function (cost) {return (cost * 1.1) ** 1.02});
-    smartFriend.setIncrease(function (count) {return count * 0.1});
-    smartFriend.setDescription("Without these guys, you're GPA would be so much lower. Take a moment to thank your local smart friend, they'd probably appreciate it.");
-    smartFriend.setInfo("Adds 1 lines of code every seconds.");
-    smartFriend.setImage("images/smart_friend.png");
-    game.addUpgrade(smartFriend);
-
-    let elemPC = new Upgrade('Elementary School PC', 2500, 20, 8, 'TICK_PER');
-    elemPC.setCostIncrementer(function (cost) {return cost * 1.3});
-    elemPC.setIncrease(function(count) {return count * 0.25});
-    elemPC.setDescription("The only things these bricks can run is Windows XP.");
-    elemPC.setInfo("Passive income is increased by 25% for each Elementary School PC");
-    elemPC.setImage("images/elem_school_pc.jpg");
-    game.addUpgrade(elemPC);
-
-    let SFGTC = new Upgrade('Smart Friend who goes to class', 50000, 1, 8, 'TICK_MULT');
-    SFGTC.setCostIncrementer(function (cost) {return cost});
-    SFGTC.setIncrease(function(count) {return 1 + count});
-    SFGTC.setDescription("There's no way someone smart and motivated are willing to give you their code, but their presence motivates everyone to work harder nonetheless.");
-    SFGTC.setInfo("Double your passive income");
-    SFGTC.setImage("images/SFGTC.jpg");
-    game.addUpgrade(SFGTC);
-
-    let typewriter = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
-    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
-    typewriter.setIncrease(function(count) {return count * 20});
-    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
-    typewriter.setInfo("Each click generates 20 more lines");
-    typewriter.setImage("images/typewriter.jpg");
-    game.addUpgrade(typewriter);
-}
-
+// Adds upgrade html stuff to the DOM. 
+// Does it on page load, not affected by game state.
 function renderUpgrades(game) {
     for (let i = 0; i < game.upgrades.length; i++) {
         let upgrade = game.upgrades[i];
@@ -167,6 +93,8 @@ function renderUpgrades(game) {
     }
 }
 
+// Renders all classes at the beginning of the game
+// Does it on page load, not affected by game state
 function renderClass(game) {
     if (!preRendered) {
         $('#pass_button').click(function() {
@@ -244,20 +172,85 @@ function renderClass(game) {
         $('#class_description').html("Welcome to COMP 550. <br/> You did it, you made it to the 500 level courses! <br/> You can handle these easy peasy sorting algorithms. What's that, big O, pshh. I know what that is. You can't surpri- <br/> Wait what..? That O has a line through it. <br/> What do you mean Θ?");
         $('#IQ_to_pass').html('You need ' + game.IQtoPass + ' IQ to pass the class.');
     }
-
-
 }
 
+function renderCutscenes(game) {
+    for (let i = 0; i < game.cutscenes.length; i++) {
+        let cutscene = game.cutscenes[i];
+        
+        let box = $("<div>");
+        box.attr("id", i + "_cutscene_box");
+        box.attr("class", "cutscene");
+        box.css("display", "none");
+        box.css("z-index", 1000);
+
+        let topText = $("<div>");
+        topText.html(cutscene.topText);
+        topText.css("text-align", "center");
+        box.append(topText);
+
+        let img = $("<img>");
+        img.attr("src", cutscene.img);
+        img.css("display", "block");
+        img.css("margin-left", "auto");
+        img.css("margin-right", "auto");
+        img.css("width", "50%");
+        box.append(img);
+
+        let botText = $("<div>");
+        botText.html(cutscene.botText);
+        botText.css("text-align", "center");
+        box.append(botText);
+
+        let closeWrapper = $("<div>");
+        closeWrapper.attr("class", "close_button_wrapper");
+        box.append(closeWrapper);
+
+        let closeButton = $('<button/>', {
+            text: "Close",
+            click: function() {
+                showingCutscene = false;
+                box.css("display", "none");
+                $('#cutscene_container').css('z-index', -1000);
+            }
+        })
+        closeButton.css("margin-left", "auto");
+        closeButton.css("margin-right", "auto");
+        closeWrapper.append(closeButton);
+
+        $("#cutscene_container").append(box);
+
+        let appearButton = $('<button/>', {
+            text: cutscene.name,
+            id: i + '_appear_button',
+            click: function() {
+                if (!showingCutscene) {
+                    appearButton.css("display", "none");
+                    showingCutscene = true;
+                    box.css("display", "block");
+                    $('#cutscene_container').css('z-index', 1000);
+                    cutscene.shown = true;
+                }
+            }
+        });
+        appearButton.css("display", "none");
+        $("#notification_container").append(appearButton);
+    }
+}
+
+// Packages all 'render' functions into one single renderGame function
+// Just changes DOM, not affected by game state.
 function renderGame(game) {
     renderClass(game);
     //Renders the DOM with the game state info.
     let type_img = $("#coder");
-    type_img.attr("src", "images/coding.jpg");
+    type_img.attr("src", "images/other/coding.jpg");
     if (!preRendered){
+        renderCutscenes(game);
         $(document).ready(function(){
-            type_img.mousedown(function(){type_img.attr("src", "images/head_slam.jpg")});
+            type_img.mousedown(function(){type_img.attr("src", "images/other/head_slam.jpg")});
             type_img.click(function() {game.onClick()});
-            type_img.mouseup(function(){type_img.attr("src", "images/coding.jpg")})
+            type_img.mouseup(function(){type_img.attr("src", "images/other/coding.jpg")})
         });
         preRendered = true;
     }
@@ -291,6 +284,19 @@ function updateUpgrades(game) {
             $(`#${i}_cost`).text("Can't buy any more!");
         } else {
             $(`#${i}_cost`).text("Upgrade Cost: " + prettify(upgrade.cost) + '\n');
+        }
+    }
+}
+
+function updateCutscenes(game) {
+    for(let i = 0; i < game.cutscenes.length; i++) {
+        let cutscene = game.cutscenes[i];
+        if (game.class == cutscene.classReq) {
+            if (!cutscene.shown){
+                if (game.IQ >= cutscene.IQReq) {
+                    $(`#${i}_appear_button`).css('display', 'block');
+                }
+            }
         }
     }
 }

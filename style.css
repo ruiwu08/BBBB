@@ -1,6 +1,3 @@
-
-
-
 #default_container{
   text-align: center;
 }
@@ -82,4 +79,33 @@
   content: "";
   display: table;
   clear: both;
+}
+
+.cutscene {
+  position: fixed;
+  width: 75%;
+  height: 75%;
+  background-color: lightblue;
+}
+
+#cutscene_container {
+  z-index: -1000;
+  position: fixed;
+  width: 75%;
+  height: 75%;
+  top: 12.5%;
+  left: 12.5%;
+  /* border: 5px solid red;
+  border-radius: 15px; */
+}
+
+#notification_container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.close_button_wrapper {
+  display: flex;
+  justify-content: center;
 }
