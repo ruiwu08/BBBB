@@ -40,6 +40,7 @@ function renderUpgrades(game) {
         let box = $("<div>");
         box.attr("id", i);
         box.addClass("upgradeBox");
+        box.addClass("card-content");
         box.css("display", "none");
 
         let name = $("<h1>");
@@ -64,6 +65,7 @@ function renderUpgrades(game) {
         let buyButton = $('<button/>', {
             text: 'Buy',
             id: i + "_buyButton",
+            class: 'button is-medium is-success',
             click: function () {game.buyUpgrade(upgrade)}
         });
         box.append(buyButton);
@@ -136,6 +138,8 @@ function renderClass(game) {
         $('#class_description').html("Welcome to COMP411. <br/> <br/> You thought the other classes were hard? <br/> You poor soul.")
         $('#body').css('background-color', 'black');
         $('#body').css('color', 'white');
+        $('.tile').css('background-color', 'black');
+        $('.tile').css('color', 'white');
         $('#IQ_to_pass').html('You need ' + game.IQtoPass + ' IQ to pass the class.');
     } else if (game.class == '411-2') {
         $('#class_title').html("<h1 style='text-decoration: line-through; color: maroon; font-size: 40px;'> HELL pt.2 </h1> COMP 411")
@@ -154,6 +158,8 @@ function renderClass(game) {
         $('#class_description').html("Welcome to COMP 426! <br/> You've done it. You've made it through hell. <br/> You can skip class again! Feel free to get comfortable and take things nice and easy. <br/> <br/> While it lasts")
         $('#body').css('background-color', 'white');
         $('#body').css('color', 'black');
+        $('.tile').css('background-color', 'initial');
+        $('.tile').css('color', 'black');
         $('#IQ_to_pass').html('You need ' + game.IQtoPass + ' IQ to pass the class.');
     } else if (game.class == '455') {
         $('#class_title').html("COMP 455")
@@ -222,6 +228,7 @@ function renderCutscenes(game) {
 
         let appearButton = $('<button/>', {
             text: cutscene.name,
+            class: 'button is-medium is-success',
             id: i + '_appear_button',
             click: function() {
                 if (!showingCutscene) {
@@ -244,13 +251,13 @@ function renderGame(game) {
     renderClass(game);
     //Renders the DOM with the game state info.
     let type_img = $("#coder");
-    type_img.attr("src", "images/other/coding.jpg");
+    type_img.attr("src", "images/other/Coding.png");
     if (!preRendered){
         renderCutscenes(game);
         $(document).ready(function(){
-            type_img.mousedown(function(){type_img.attr("src", "images/other/head_slam.jpg")});
+            type_img.mousedown(function(){type_img.attr("src", "images/other/CodingSAd.png")});
             type_img.click(function() {game.onClick()});
-            type_img.mouseup(function(){type_img.attr("src", "images/other/coding.jpg")})
+            type_img.mouseup(function(){type_img.attr("src", "images/other/Coding.png")})
         });
         preRendered = true;
     }
