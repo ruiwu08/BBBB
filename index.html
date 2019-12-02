@@ -4,13 +4,25 @@
         <link rel = "stylesheet" href = "style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-signin-client_id" content="816525634620-53b4s71d279ga0egp5famcfcmaejjk2k.apps.googleusercontent.com">
         <link rel = "stylesheet" href="node_modules/bulma/css/bulma.css">
     </head>
     <body id="body">
-            <div id="header">
-                    <h1 class="header">Hacker HeyDay</h1>
+        <div id="header">
+                <h1 class="header">Hacker HeyDay</h1>
+        </div>
+        <nav class="navbar" role="naviagation" aria-label="main navigation">
+          <div class="navbar-end">
+            <div class="navbar-item">
+                <div>
+                  <a class="button">Google Sign In</a>
+                  <a class="button is-light">Login in</a>
+                  <a class="button is-success">Sign up</a>
+                </div>
             </div>
-            <br>
+          </div>
+        </nav>
+        <br>
         <div class="tile is-ancestor">
             <div id="player_container" class="tile is-parent is-5 has-text-left" >
                     <article class="tile is-child notification">
@@ -67,6 +79,7 @@
                 </div>
         <div id="cutscene_container"></div>
         <div id="notification_container"></div>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script type="module" src="node_modules/jquery/dist/jquery.js"></script>
         <script type="module" src="main.js"></script>
     </body>
