@@ -6,7 +6,7 @@ export default function makeUpgrades(game) {
     devUpgrade.setIncrease(function(count) {return count * 10000000});
     devUpgrade.setDescription("For development. Delete in final product");
     devUpgrade.setInfo("For development. Delete in final product");
-    devUpgrade.setImage("images/other/head_slam.jpg");
+    devUpgrade.setImage("images/other/Coding.jpg");
     game.addUpgrade(devUpgrade);
 
     let friend = new Upgrade('Friend', 10, 20, 0, 'TICK');
