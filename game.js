@@ -15,6 +15,7 @@ export default class Game {
         this.IQtoPass = 100;
         this.readyToPass = false;
         this.classBonus = 1;
+
     }
 
     getClass() {return this.class;}
