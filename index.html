@@ -7,31 +7,66 @@
         <link rel = "stylesheet" href="node_modules/bulma/css/bulma.css">
     </head>
     <body id="body">
-        <div class="row">
-            <div id="default_container" class="column">
-                <div id="class_container">
-                    <p id="class_title"></p>
-                    <div class='tooltip'>
-                        <img id="teacher_pic">
-                        <p id='teacher_text' class='tooltiptext'></p>
+            <div id="header">
+                    <h1 class="header">Hacker HeyDay</h1>
+            </div>
+            <br>
+        <div class="tile is-ancestor">
+            <div id="player_container" class="tile is-parent is-5 has-text-left" >
+                    <article class="tile is-child notification">
+                      <p class="title has-text-centered grn">Click Carl to Code!</p>
+                      <small class="has-text-centered"><strong>Hint: </strong>Increase your IQ by coding so you can pass the class. Purchase upgrades with your lines to code faster!</small>
+                      <br>
+                      <br>
+                      <figure class="image is-4by3">
+                        <img id="coder" style="background-color:white;" >
+                      </figure>
+                      <br>
+                        <p id="lines" class="subtitle has-text-centered">Lines: 0</p>
+                        <p id="lps" class="subtitle has-text-centered">Lines per second: 0</p>
+                        <p id="IQ" class="subtitle has-text-centered">IQ: 0</p>    
+                    </article>
+                  </div>
+                  <div id="class_container" class="tile is-parent is-7">
+                        <article class="tile is-child notification">
+                                <p id="class_title" class="title grn">
+                                <article class="media pp_body">
+                                        <figure class="media-left">
+                                          <p class="image">
+                                                <div class='tooltip'>
+                                                        <img id="teacher_pic" class="img">
+                                                        <p id='teacher_text' class='tooltiptext'></p>
+                                                </div>
+                                          </p>
+                                        </figure>
+                                        <div class="media-content">
+                                          <div class="content">
+                                            <p>
+                                              <p id="teacher_title" class="name"></p>
+                                              <small class="desc"><p id="class_description"></p></small>
+                                            </p>
+                                        </div>
+                        </article>
+                        <br>
+                        <strong><p id="IQ_to_pass"></p></strong>
+                        <br>
+                        <button id="pass_button" class="button is-medium is-success">I'm smart enough to pass!</button>
+                        <br>
+                      </div>
                     </div>
-                    <p id="teacher_title"></p>
-                    <p id="class_description"></p>
-                    <button id="pass_button">I'm smart enough to pass!</button>
-                    <p id="IQ_to_pass"></p>
+            <div class="tile is-ancestor">
+                    <div class="tile is-parent is-12">
+                      <article class="tile is-child notification">
+                        <div class="content">
+                          <p id="upgrade_title" class="title grn">Upgrades</p>
+                          <div class="content">
+                                <section id="upgrade_container" class="card"></div>
+                          </div>
+                      </article>
+                    </div>
                 </div>
-                <div id="player_container">
-                    <img id="coder">
-                    <p id="lines">Lines: 0</p>
-                    <p id="lps">Lines per second: 0</p>
-                    <p id="IQ">IQ: 0</p>
-                </div>
-            </div>
-            <div class="column">
-                <p id="upgrade_title">Upgrades</p>
-                <div id="upgrade_container"></div>
-            </div>
-        </div>
+        <div id="cutscene_container"></div>
+        <div id="notification_container"></div>
         <script type="module" src="node_modules/jquery/dist/jquery.js"></script>
         <script type="module" src="main.js"></script>
     </body>

@@ -1,4 +1,5 @@
 import Upgrade from './upgrade.js';
+import Cutscene from './cutscene.js';
 
 export default class Game {
     constructor(user, password) {
@@ -8,6 +9,7 @@ export default class Game {
         this.lines = 0;
         this.IQ = 0;
         this.upgrades = [];
+        this.cutscenes = [];
         this.lps = 0;
         this.class = '110';
         this.IQtoPass = 100;
