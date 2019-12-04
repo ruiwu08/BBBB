@@ -5,8 +5,42 @@ import makeUpgrades from './make_upgrades.js';
 import makeCutscenes from './make_cutscenes.js';
 
 
+
 let preRendered = false;
 let showingCutscene = false;
+async function saveGame(gameState, event) {
+    event.preventDefault();
+    let jwt = window.localStorage.getItem('jwt');
+    /*let upgrades = {};
+    gameState.upgrades.forEach(upgrade => {
+        upgrades[upgrade.name]
+    });*/
+    let user_result = await axios({
+        method: 'POST',
+        url: 'http://localhost:3000/user/' + gameState.user,
+        headers: {Authorization: `Bearer ${jwt}`},
+        data: {
+            data: {lines: gameState.lines,
+            IQ: gameState.IQ,
+            lps: gameState.lps,
+            class: gameState.class,
+            IQtoPass: gameState.IQtoPass,
+            readyToPass: gameState.readyToPass,
+            classBonus: gameState.classBonus,            
+            }
+        }
+    });
+
+    let public_result = await axios({
+        method: 'POST',
+        url: 'http://localhost:3000/public/' + gameState.user,
+        data: {
+            data: {overallIQ: 0
+            }
+        }
+    })
+    
+}
 
 function main() {
     // Implement later so gamestates can be saved:
@@ -15,7 +49,16 @@ function main() {
     // } else {
     //     dont make upgrades just render Upgrades
     // }
-    let game = new Game('user', 'password');
+    let game;
+    let user = localStorage.getItem("currentUser")
+    if (user == undefined) {
+        game= new Game("user", "password");
+    } else {
+        game = new Game(user, "password");
+        
+    }
+    $("#navbar").prepend(`<div> Hello ${game.user}</div>`)
+    
     makeUpgrades(game);
     makeCutscenes(game);
     renderGame(game);
@@ -28,6 +71,9 @@ function main() {
         updateUpgrades(game);
         updateCutscenes(game);
     }, 100);
+    $("#save").on('click', (e) => {
+        saveGame(game, e)
+    });
 }
 
 

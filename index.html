@@ -7,36 +7,27 @@
         <meta name="google-signin-scope" content="profile email">
         <meta name="google-signin-client_id" content="816525634620-8jj1gel3digv02d2vd78im9v70cnb78p.apps.googleusercontent.com">
         <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link rel = "stylesheet" href="node_modules/bulma/css/bulma.css">
+        
     </head>
     <body id="body">
+        
         <div id="header">
                 <h1 class="header">Hacker HeyDay</h1>
         </div>
-        <nav class="navbar" role="naviagation" aria-label="main navigation">
+        <nav  class="navbar" role="naviagation" aria-label="main navigation">
           <div class="navbar-end">
-            <div class="navbar-item">
+            <div id = "navbar" class="navbar-item">
                 <div>
-                  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                  <script>
-                    function onSignIn(googleUser) {
-                      // Useful data for your client-side scripts:
-                      var profile = googleUser.getBasicProfile();
-                      console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-                      console.log('Full Name: ' + profile.getName());
-                      console.log('Given Name: ' + profile.getGivenName());
-                      console.log('Family Name: ' + profile.getFamilyName());
-                      console.log("Image URL: " + profile.getImageUrl());
-                      console.log("Email: " + profile.getEmail());
-              
-                      // The ID token you need to pass to your backend:
-                      var id_token = googleUser.getAuthResponse().id_token;
-                      console.log("ID Token: " + id_token);
-                    }
-                  </script>
+                  
                   <br>
-                  <div class="button is-light">Login in</div>
-                  <div class="button is-success">Sign up</div>
+                  <div class="button is-light" id = "login">Login</div>
+                  <div class="button has-background-success" id = "save">Save Game</div>
+                  <script type = "text/javascript">
+                  $("#login").on("click", () => window.location.href = window.location.href + "/login")
+                  </script>
+                  
                 </div>
             </div>
           </div>
@@ -98,8 +89,9 @@
                 </div>
         <div id="cutscene_container"></div>
         <div id="notification_container"></div>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script type="module" src="node_modules/jquery/dist/jquery.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
         <script type="module" src="main.js"></script>
     </body>
 </html>
