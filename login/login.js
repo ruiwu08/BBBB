@@ -71,7 +71,7 @@ export const handleCreate = (event) => {
         alert("account created");
         
         
-        
+        window.location.href = window.location.href.replace("/login", "")
     }
         ).catch(err => alert("There was an error with creating your account \n" + err)); 
 }
