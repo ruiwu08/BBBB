@@ -124,7 +124,7 @@ function main() {
             game.IQtoPass = details.result.IQtoPass;
             game.readyToPass = details.result.readyToPass;
             $("#login").text("Change Account Login")
-            $("#navbar").prepend(`<div> Hello ${user}</div>`)
+            $("#navbar").prepend(`<div class="navbar-item"> Hello ${user}</div>`)
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
             makeUpgrades(game);
@@ -139,6 +139,9 @@ function main() {
                 updateUpgrades(game);
                 updateCutscenes(game);
             }, 100);
+            if (user !== 'user') {
+                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+            }
             $("#save").on('click', (e) => {
                 saveGame(game, e)
             });
@@ -161,17 +164,12 @@ function main() {
                 updateUpgrades(game);
                 updateCutscenes(game);
             }, 100);
+
             $("#save").on('click', (e) => {
                 saveGame(game, e)
             });
         })
-
-
     }
-    
-
-
-    
 }
 
 
@@ -358,6 +356,7 @@ function renderCutscenes(game) {
 
         let closeButton = $('<button/>', {
             text: "Close",
+            class: 'button',
             click: function () {
                 showingCutscene = false;
                 box.css("display", "none");

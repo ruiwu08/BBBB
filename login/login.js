@@ -33,7 +33,7 @@ export const handleCreateOption = (event) => {
         <div class = 'card-header-title'>Create Account for BBBB Game</div>
         <div class = 'card-content'>
             <input class = "input" type = "text" placeHolder = "Username" id = "user"></input>
-            <input class = "input" type = "text" placeHolder = "Password" id = "pass"></input>
+            <input class = "input" type = "password" placeHolder = "Password" id = "pass"></input>
             <button class = "button" id = "create">Create Account</button>
             <div>You can create an account through Google below, an account will be made for you through our website with username and password being your Gmail</div>
             <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -97,7 +97,7 @@ export const setup = () => {
     <div class = "card-content">
 
         <input class = "input" type = "text" placeHolder = "Username" id = "user"></input>
-        <input class = "input" type = "text" placeHolder = "Password" id = "pass"></input>
+        <input class = "input" type = "password" placeHolder = "Password" id = "pass"></input>
         <button class = "button" id = "login">Login</button>
     </div>
     <button class = "button" id = "create">Create Account</button>
@@ -107,10 +107,6 @@ export const setup = () => {
     $("#login").on('click', handleLogin);
 
 }
-
-
-
-
 
 $(function() {
     setup();
