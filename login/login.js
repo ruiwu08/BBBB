@@ -11,6 +11,9 @@ async function createAccount (user, password){
     });
     return result;
 }
+
+
+
 async function login(user, password) {
     let result = await axios({
         method: 'post',

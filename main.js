@@ -10,6 +10,14 @@ let preRendered = false;
 let showingCutscene = false;
 async function saveGame(gameState, event) {
     event.preventDefault();
+    
+    if (document.getElementById("delete") == null) {
+        $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
+        $("#delete").on('click', (e) => {
+            deleteGameHistory(localStorage.getItem("currentUser"), e);
+         })
+    }
+    
     let jwt = window.localStorage.getItem('jwt');
     /*let upgrades = {};
     gameState.upgrades.forEach(upgrade => {
@@ -53,6 +61,7 @@ async function saveGame(gameState, event) {
             }
         }
     })
+    
 
 }
 async function getGameDetails(user) {
@@ -63,14 +72,34 @@ async function getGameDetails(user) {
     });
     return result.data;
 }
+async function deleteGameHistory(user, event) {
+    event.preventDefault();
+     
+    let user_result = await axios({
+        method: 'DELETE',
+        url: 'http://localhost:3000/user/' + user,
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`},
+    })
+    let public_result = await axios({
+        method: 'DELETE',
+        url: 'http://localhost:3000/public/' + user,
+    })
+    let private_result = await axios({
+        method: 'DELETE',
+        url: 'http://localhost:3000/private/' + user,
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+    })
+    $("#delete").remove();
+    window.location.reload();
+}
 
 function main() {
 
     let game;
     let user = localStorage.getItem("currentUser")
-    if (user == undefined) {
+    if (user == undefined || user == "") {
         user = "user";
-        game = new Game("user", "password");
+        game = new Game(user, "password");
         makeUpgrades(game);
         makeCutscenes(game);
         renderGame(game);
@@ -94,7 +123,10 @@ function main() {
             game.classBonus = details.result.classBonus;
             game.IQtoPass = details.result.IQtoPass;
             game.readyToPass = details.result.readyToPass;
-
+            $("#login").text("Change Account Login")
+            $("#navbar").prepend(`<div> Hello ${user}</div>`)
+            $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
+            $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
             makeUpgrades(game);
             makeCutscenes(game);
             renderGame(game);
@@ -107,12 +139,20 @@ function main() {
                 updateUpgrades(game);
                 updateCutscenes(game);
             }, 100);
+            $("#save").on('click', (e) => {
+                saveGame(game, e)
+            });
+            $("#delete").on('click', (e) => {
+                deleteGameHistory(user, e);
+            })
         }).catch(() => {
             game = new Game(user, "password");
             makeUpgrades(game);
             makeCutscenes(game);
             renderGame(game);
-
+            $("#navbar").prepend(`<div> Hello ${user}</div>`);
+            $("#login").text("Change Account Login");
+            $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             updateGame(game);
             updateUpgrades(game);
             window.setInterval(function () {
@@ -121,16 +161,17 @@ function main() {
                 updateUpgrades(game);
                 updateCutscenes(game);
             }, 100);
+            $("#save").on('click', (e) => {
+                saveGame(game, e)
+            });
         })
 
 
     }
-    $("#navbar").prepend(`<div> Hello ${user}</div>`)
+    
 
 
-    $("#save").on('click', (e) => {
-        saveGame(game, e)
-    });
+    
 }
 
 
