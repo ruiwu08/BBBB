@@ -4,21 +4,133 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BBBB Leaderboard</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
 
         <!-- Include links to CSS stylesheets below -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+        <link rel="stylesheet" href="styles.css" />
     </head>
 
     <body>
-        
-        
-
+        <div id="header">
+                <h1 class="header">Leaderboard</h1>
+        </div>
+        <nav  class="navbar is-light" role="naviagation" aria-label="main navigation">
+            <div class="navbar-start">
+                <a class="navbar-item" href="../">
+                    Back to Game
+                </a>
+            </div>
+        </nav>
+        <br>
+        <section>
+            <div>
+                <table class="table has-text-centered is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Player</th>
+                            <th>Overall IQ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="leaderboard">
+                        <!--Delete later, only putting this year to see how it'll look design wise-->
+                        <tr>
+                            <th> 1 </th>
+                            <td>User 1</td>
+                            <td>IQ here</td>
+                        </tr>
+                        <tr>
+                            <th> 2 </th>
+                            <td>User 2</td>
+                            <td>IQ there</td>
+                        </tr>
+                        <tr>
+                            <th> 3 </th>
+                            <td>User 3</td>
+                            <td>IQ over there</td>
+                        </tr>
+                        <tr>
+                            <th> 4 </th>
+                            <td>User 4</td>
+                            <td>IQ here</td>
+                        </tr>
+                        <tr>
+                            <th> 5 </th>
+                            <td>User 5</td>
+                            <td>IQ there</td>
+                        </tr>
+                        <tr>
+                            <th> 6 </th>
+                            <td>User 6</td>
+                            <td>IQ over there</td>
+                        </tr>
+                        <tr>
+                            <th> 7 </th>
+                            <td>User 7</td>
+                            <td>IQ here</td>
+                        </tr>
+                        <tr>
+                            <th> 8 </th>
+                            <td>User 8</td>
+                            <td>IQ there</td>
+                        </tr>
+                        <tr>
+                            <th> 9 </th>
+                            <td>User 9</td>
+                            <td>IQ over there</td>
+                        </tr>
+                        <tr>
+                            <th> 10 </th>
+                            <td>User 10</td>
+                            <td>IQ here</td>
+                        </tr>
+                        <tr>
+                            <th> 11 </th>
+                            <td>User 11</td>
+                            <td>IQ there</td>
+                        </tr>
+                        <tr>
+                            <th> 12 </th>
+                            <td>User 12</td>
+                            <td>IQ over there</td>
+                        </tr>
+                        <tr>
+                            <th> 12 </th>
+                            <td>User 12</td>
+                            <td>IQ here</td>
+                        </tr>
+                        <tr>
+                            <th> 12 </th>
+                            <td>User 12</td>
+                            <td>IQ there</td>
+                        </tr>
+                        <tr>
+                            <th> 13 </th>
+                            <td>User 13</td>
+                            <td>IQ over there</td>
+                        </tr>
+                        <tr>
+                            <th> 11 </th>
+                            <td>User 11</td>
+                            <td>IQ here</td>
+                        </tr>
+                        <tr>
+                            <th> 12 </th>
+                            <td>User 12</td>
+                            <td>IQ there</td>
+                        </tr>
+                        <tr>
+                            <th> 13 </th>
+                            <td>User 13</td>
+                            <td>IQ over there</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
         <script type = "module" src="leaderboard.js"></script>
-        
-        
-
     </body>
 </html>
