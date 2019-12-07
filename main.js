@@ -5,29 +5,171 @@ import makeUpgrades from './make_upgrades.js';
 import makeCutscenes from './make_cutscenes.js';
 
 
+
 let preRendered = false;
 let showingCutscene = false;
+async function saveGame(gameState, event) {
+    event.preventDefault();
+    
+    if (document.getElementById("delete") == null) {
+        $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
+        $("#delete").on('click', (e) => {
+            deleteGameHistory(localStorage.getItem("currentUser"), e);
+         })
+    }
+    
+    let jwt = window.localStorage.getItem('jwt');
+    /*let upgrades = {};
+    gameState.upgrades.forEach(upgrade => {
+        upgrades[upgrade.name]
+    });*/
+    let user_result = await axios({
+        method: 'POST',
+        url: 'http://localhost:3000/user/' + gameState.user,
+        headers: { Authorization: `Bearer ${jwt}` },
+        data: {
+            data: {
+                lines: gameState.lines,
+                IQ: gameState.IQ,
+                lps: gameState.lps,
+                class: gameState.class,
+                IQtoPass: gameState.IQtoPass,
+                readyToPass: gameState.readyToPass,
+                classBonus: gameState.classBonus,
+            }
+        }
+    });
+
+    let public_result = await axios({
+        method: 'POST',
+        url: 'http://localhost:3000/public/' + gameState.user,
+        data: {
+            data: {
+                overallIQ: 0
+            }
+        }
+    })
+    let private_result = await axios({
+        method: 'POST',
+        url: 'http://localhost:3000/private/' + gameState.user,
+        headers: { Authorization: `Bearer ${jwt}` },
+        data: {
+            data: {
+                class: gameState.class,
+                lines: gameState.lines,
+                IQ: 0,
+            }
+        }
+    })
+    
+
+}
+async function getGameDetails(user) {
+    let result = await axios({
+        method: 'GET',
+        url: 'http://localhost:3000/user/' + user,
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    });
+    return result.data;
+}
+async function deleteGameHistory(user, event) {
+    event.preventDefault();
+     
+    let user_result = await axios({
+        method: 'DELETE',
+        url: 'http://localhost:3000/user/' + user,
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`},
+    })
+    let public_result = await axios({
+        method: 'DELETE',
+        url: 'http://localhost:3000/public/' + user,
+    })
+    let private_result = await axios({
+        method: 'DELETE',
+        url: 'http://localhost:3000/private/' + user,
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+    })
+    $("#delete").remove();
+    window.location.reload();
+}
 
 function main() {
-    // Implement later so gamestates can be saved:
-    // if (new game) {
-    //     make upgrades
-    // } else {
-    //     dont make upgrades just render Upgrades
-    // }
-    let game = new Game('user', 'password');
-    makeUpgrades(game);
-    makeCutscenes(game);
-    renderGame(game);
 
-    updateGame(game);
-    updateUpgrades(game);
-    window.setInterval(function() {
-        game.onTick(game);
+    let game;
+    let user = localStorage.getItem("currentUser")
+    if (user == undefined || user == "") {
+        user = "user";
+        game = new Game(user, "password");
+        makeUpgrades(game);
+        makeCutscenes(game);
+        renderGame(game);
+
         updateGame(game);
         updateUpgrades(game);
-        updateCutscenes(game);
-    }, 100);
+        window.setInterval(function () {
+            game.onTick(game);
+            updateGame(game);
+            updateUpgrades(game);
+            updateCutscenes(game);
+        }, 100);
+    } else {
+        getGameDetails(user).then(details => {
+            game = new Game(user, "password")
+            
+            game.lines = details.result.lines;
+            game.IQ = details.result.IQ;
+            game.lps = details.result.lps;
+            game.class = details.result.class;
+            game.classBonus = details.result.classBonus;
+            game.IQtoPass = details.result.IQtoPass;
+            game.readyToPass = details.result.readyToPass;
+            $("#login").text("Change Account Login")
+            $("#navbar").prepend(`<div class="navbar-item"> Hello ${user}</div>`)
+            $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
+            $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
+            makeUpgrades(game);
+            makeCutscenes(game);
+            renderGame(game);
+
+            updateGame(game);
+            updateUpgrades(game);
+            window.setInterval(function () {
+                game.onTick(game);
+                updateGame(game);
+                updateUpgrades(game);
+                updateCutscenes(game);
+            }, 100);
+            if (user !== 'user') {
+                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+            }
+            $("#save").on('click', (e) => {
+                saveGame(game, e)
+            });
+            $("#delete").on('click', (e) => {
+                deleteGameHistory(user, e);
+            })
+        }).catch(() => {
+            game = new Game(user, "password");
+            makeUpgrades(game);
+            makeCutscenes(game);
+            renderGame(game);
+            $("#navbar").prepend(`<div> Hello ${user}</div>`);
+            $("#login").text("Change Account Login");
+            $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
+            updateGame(game);
+            updateUpgrades(game);
+            window.setInterval(function () {
+                game.onTick(game);
+                updateGame(game);
+                updateUpgrades(game);
+                updateCutscenes(game);
+            }, 100);
+
+            $("#save").on('click', (e) => {
+                saveGame(game, e)
+            });
+        })
+    }
 }
 
 
@@ -66,7 +208,7 @@ function renderUpgrades(game) {
             text: 'Buy',
             id: i + "_buyButton",
             class: 'button is-medium is-success',
-            click: function () {game.buyUpgrade(upgrade)}
+            click: function () { game.buyUpgrade(upgrade) }
         });
         box.append(buyButton);
         box.append("<br/>")
@@ -99,7 +241,7 @@ function renderUpgrades(game) {
 // Does it on page load, not affected by game state
 function renderClass(game) {
     if (!preRendered) {
-        $('#pass_button').click(function() {
+        $('#pass_button').click(function () {
             if (game.passClass()) {
                 console.log(game.class);
                 resetUpgradeContainer();
@@ -109,7 +251,7 @@ function renderClass(game) {
 
         })
     }
-    if (game.class == '110'){
+    if (game.class == '110') {
         $('#class_title').html('COMP 110');
         $('#teacher_pic').attr('src', 'images/faculty/kris_jordan.jpg');
         $('#teacher_title').html('Kris Jordan');
@@ -183,7 +325,7 @@ function renderClass(game) {
 function renderCutscenes(game) {
     for (let i = 0; i < game.cutscenes.length; i++) {
         let cutscene = game.cutscenes[i];
-        
+
         let box = $("<div>");
         box.attr("id", i + "_cutscene_box");
         box.attr("class", "cutscene");
@@ -214,7 +356,8 @@ function renderCutscenes(game) {
 
         let closeButton = $('<button/>', {
             text: "Close",
-            click: function() {
+            class: 'button',
+            click: function () {
                 showingCutscene = false;
                 box.css("display", "none");
                 $('#cutscene_container').css('z-index', -1000);
@@ -230,7 +373,7 @@ function renderCutscenes(game) {
             text: cutscene.name,
             class: 'button is-medium is-success',
             id: i + '_appear_button',
-            click: function() {
+            click: function () {
                 if (!showingCutscene) {
                     appearButton.css("display", "none");
                     showingCutscene = true;
@@ -252,19 +395,19 @@ function renderGame(game) {
     //Renders the DOM with the game state info.
     let type_img = $("#coder");
     type_img.attr("src", "images/other/Coding.png");
-    if (!preRendered){
+    if (!preRendered) {
         renderCutscenes(game);
-        $(document).ready(function(){
-            type_img.mousedown(function(){type_img.attr("src", "images/other/CodingSAd.png")});
-            type_img.click(function() {game.onClick()});
-            type_img.mouseup(function(){type_img.attr("src", "images/other/Coding.png")})
+        $(document).ready(function () {
+            type_img.mousedown(function () { type_img.attr("src", "images/other/CodingSAd.png") });
+            type_img.click(function () { game.onClick() });
+            type_img.mouseup(function () { type_img.attr("src", "images/other/Coding.png") })
         });
         preRendered = true;
     }
     $('#pass_button').css('visibility', 'hidden');
 
     renderUpgrades(game);
-}   
+}
 
 function updateGame(game) {
     //Updates the DOM with the game state info.
@@ -279,7 +422,7 @@ function updateGame(game) {
 }
 
 function updateUpgrades(game) {
-    for(let i = 0; i < game.upgrades.length; i++) {
+    for (let i = 0; i < game.upgrades.length; i++) {
         let upgrade = game.upgrades[i];
         //Makes upgrade visible only if UnlockIQ is met.
         if (game.IQ >= upgrade.unlockIQ) {
@@ -296,10 +439,10 @@ function updateUpgrades(game) {
 }
 
 function updateCutscenes(game) {
-    for(let i = 0; i < game.cutscenes.length; i++) {
+    for (let i = 0; i < game.cutscenes.length; i++) {
         let cutscene = game.cutscenes[i];
         if (game.class == cutscene.classReq) {
-            if (!cutscene.shown){
+            if (!cutscene.shown) {
                 if (game.IQ >= cutscene.IQReq) {
                     $(`#${i}_appear_button`).css('display', 'block');
                 }
@@ -322,11 +465,11 @@ function prettify(num) {
         return (num / (10 ** 6)).toFixed(1) + " million";
     } else if (num >= 10 ** 9 && num < 10 ** 12) {
         return (num / (10 ** 9)).toFixed(1) + " billion";
-    } else if(num >= 10 ** 12 && num < 10 ** 15) {
+    } else if (num >= 10 ** 12 && num < 10 ** 15) {
         return (num / (10 ** 12)).toFixed(1) + " trillion";
-    } else if(num >= 10 ** 15 && num < 10 ** 18) {
+    } else if (num >= 10 ** 15 && num < 10 ** 18) {
         return (num / (10 ** 15)).toFixed(1) + " quadrillion";
-    } else if(num >= 10 ** 18 && num < 10 ** 21) {
+    } else if (num >= 10 ** 18 && num < 10 ** 21) {
         return (num / (10 ** 18)).toFixed(1) + " quintillion";
     } else {
         return num;
