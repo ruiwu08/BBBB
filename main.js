@@ -45,7 +45,8 @@ async function saveGame(gameState, event) {
         url: 'http://localhost:3000/public/users/' + gameState.user,
         data: {
             data: {
-                overallIQ: 0
+                // Change when an overall IQ is figured out
+                overallIQ: gameState.IQ,
             }
         }
     })
