@@ -42,7 +42,7 @@ async function saveGame(gameState, event) {
 
     let public_result = await axios({
         method: 'POST',
-        url: 'http://localhost:3000/public/' + gameState.user,
+        url: 'http://localhost:3000/public/users/' + gameState.user,
         data: {
             data: {
                 overallIQ: 0
@@ -51,7 +51,7 @@ async function saveGame(gameState, event) {
     })
     let private_result = await axios({
         method: 'POST',
-        url: 'http://localhost:3000/private/' + gameState.user,
+        url: 'http://localhost:3000/private/users/' + gameState.user,
         headers: { Authorization: `Bearer ${jwt}` },
         data: {
             data: {
@@ -82,11 +82,11 @@ async function deleteGameHistory(user, event) {
     })
     let public_result = await axios({
         method: 'DELETE',
-        url: 'http://localhost:3000/public/' + user,
+        url: 'http://localhost:3000/public/users/' + user,
     })
     let private_result = await axios({
         method: 'DELETE',
-        url: 'http://localhost:3000/private/' + user,
+        url: 'http://localhost:3000/private/users/' + user,
         headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
     })
     $("#delete").remove();
