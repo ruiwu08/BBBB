@@ -124,6 +124,7 @@ function main() {
             game.classBonus = details.result.classBonus;
             game.IQtoPass = details.result.IQtoPass;
             game.readyToPass = details.result.readyToPass;
+            window.localStorage.setItem("userClass", game.class);
             $("#login").text("Change Account Login")
             $("#navbar").prepend(`<div class="navbar-item"> Hello ${user}</div>`)
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
@@ -159,6 +160,7 @@ function main() {
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             updateGame(game);
             updateUpgrades(game);
+            window.localStorage.setItem("userClass", game.class);
             window.setInterval(function () {
                 game.onTick(game);
                 updateGame(game);
