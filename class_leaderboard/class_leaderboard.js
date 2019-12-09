@@ -11,6 +11,7 @@ async function getPlayers() {
 export const setup = () => {
     let $table = $(".leaderboard");
     let userClass = localStorage.getItem("userClass");
+    let user = localStorage.getItem("currentUser");
     // Stores Users, class, lines, iq in array --> Sort iq in decreasing order --> append to Leaderboard
     getPlayers().then(function(data) {
         Object.keys(data).forEach(function (key) {
@@ -30,7 +31,16 @@ export const setup = () => {
         });
         scoreIQ = scoreIQ.sort(function (playerA, playerB) {return playerB.IQ - playerA.IQ});
 
+
         for(let i = 0; i < scoreIQ.length; i++) {
+            if(scoreIQ[i].user == user) {
+                $(`#user_rank`).append(`<p>You are player: ${scoreIQ[i].user}</p>
+                <p>You have ${prettify(scoreIQ[i].lines)} lines</p>
+                <p>Your IQ is ${prettify(scoreIQ[i].IQ)}</p>
+                <p>Your rank: ${i+1}</p>
+                `);
+
+            }
             $table.append(`<tr>
                 <th> ${i+1} </th>
                 <td> ${scoreIQ[i].user} </td>

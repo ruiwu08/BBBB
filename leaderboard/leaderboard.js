@@ -26,12 +26,22 @@ export const setup = () => {
         scoreIQ = scoreIQ.sort(function (playerA, playerB) {return playerB.overallIQ - playerA.overallIQ});
 
         for(let i = 0; i < scoreIQ.length; i++) {
-            console.log(scoreIQ[i]);
-            $table.append(`<tr>
-                <th> ${i+1} </th>
-                <td> ${scoreIQ[i].user} </td>
-                <td> ${prettify(scoreIQ[i].overallIQ)} </td>
-            </tr>`)
+            if(i == 0) {
+                $(`#rank1`).append(`<p> Player: ${scoreIQ[i].user} </p>
+                    <p> Overall IQ: ${prettify(scoreIQ[i].overallIQ)} </p>`);
+            } else if(i == 1) {
+                $(`#rank2`).append(`<p> Player: ${scoreIQ[i].user} </p>
+                <p> Overall IQ: ${prettify(scoreIQ[i].overallIQ)} </p>`);
+            } else if (i == 2) {
+                $(`#rank3`).append(`<p> Player: ${scoreIQ[i].user} </p>
+                <p> Overall IQ: ${prettify(scoreIQ[i].overallIQ)} </p>`);
+            } else {
+                $table.append(`<tr>
+                    <th> ${i+1} </th>
+                    <td> ${scoreIQ[i].user} </td>
+                    <td> ${prettify(scoreIQ[i].overallIQ)} </td>
+                </tr>`);
+            }
         }
     })
 
