@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BBBB Leaderboard</title>
+
+        <!-- Include links to CSS stylesheets below -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+        <link rel="stylesheet" href="../style.css" />
+    </head>
+
+    <body>
+        <div id="header">
+                <h1 class="header">Class Leaderboard</h1>
+        </div>
+        <nav  class="navbar is-light" role="naviagation" aria-label="main navigation">
+            <div class="navbar-start">
+                <a class="navbar-item" href="../">
+                    Back to Game
+                </a>
+            </div>
+        </nav>
+        <br>
+        <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <div class="tile is-child notification">
+                        <!--Insert something here???-->
+                        <p>Welcome to the class leaderboard, how you do measure up?</p>
+                    </div>
+                </div>
+                <div class="tile is-parent is-7">
+                    <div class="tile is-child notification">
+                            <p id="class_title" class="title grn"></p>
+                                <article class="media pp_body">
+                                    <figure class="media-left">
+                                        <p class="image">
+                                            <div class='tooltip'>
+                                            <img id="teacher_pic" class="img">
+                                            <p id='teacher_text' class='tooltiptext'></p>
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <p id="teacher_title" class="name"></p>
+                                                <small class="desc"><p id="class_description"></p></small>
+                                            </p>
+                                    </div>
+                                </article>
+                    </div>
+                </div>
+            </div>
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                        <div class="tile is-child notification">
+                            <table class="table has-text-centered is-hoverable is-fullwidth">
+                                <thead>
+                                    <tr>
+                                        <th>Position</th>
+                                        <th>Player</th>
+                                        <th>Lines</th>
+                                        <th>IQ</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="leaderboard">
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- Include links to JavaScript files below -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script type = "module" src="class_leaderboard.js"></script>
+    </body>
+</html>
