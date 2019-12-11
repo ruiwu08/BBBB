@@ -27,14 +27,14 @@ export const setup = () => {
 
         for(let i = 0; i < scoreIQ.length; i++) {
             if(i == 0) {
-                $(`#rank1`).append(`<p> Player: ${scoreIQ[i].user} </p>
-                    <p> Overall IQ: ${prettify(scoreIQ[i].overallIQ)} </p>`);
+                $(`#rank1`).append(`<p> <strong>Player:</strong> ${scoreIQ[i].user} </p>
+                    <p> <strong>Overall IQ:</strong> ${prettify(scoreIQ[i].overallIQ)} </p>`);
             } else if(i == 1) {
-                $(`#rank2`).append(`<p> Player: ${scoreIQ[i].user} </p>
-                <p> Overall IQ: ${prettify(scoreIQ[i].overallIQ)} </p>`);
+                $(`#rank2`).append(`<p> <strong>Player:</strong> ${scoreIQ[i].user} </p>
+                    <p> <strong>Overall IQ:</strong> ${prettify(scoreIQ[i].overallIQ)} </p>`);
             } else if (i == 2) {
-                $(`#rank3`).append(`<p> Player: ${scoreIQ[i].user} </p>
-                <p> Overall IQ: ${prettify(scoreIQ[i].overallIQ)} </p>`);
+                $(`#rank3`).append(`<p> <strong>Player:</strong> ${scoreIQ[i].user} </p>
+                    <p> <strong>Overall IQ:</strong> ${prettify(scoreIQ[i].overallIQ)} </p>`);
             } else {
                 $table.append(`<tr>
                     <th> ${i+1} </th>

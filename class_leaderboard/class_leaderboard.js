@@ -34,12 +34,11 @@ export const setup = () => {
 
         for(let i = 0; i < scoreIQ.length; i++) {
             if(scoreIQ[i].user == user) {
-                $(`#user_rank`).append(`<p>You are player: ${scoreIQ[i].user}</p>
-                <p>You have ${prettify(scoreIQ[i].lines)} lines</p>
-                <p>Your IQ is ${prettify(scoreIQ[i].IQ)}</p>
-                <p>Your rank: ${i+1}</p>
+                $(`#user_rank`).append(`<p>You are <strong>${scoreIQ[i].user}</strong>.</p>
+                <p>You have <strong>${prettify(scoreIQ[i].lines)} lines</strong>.</p>
+                <p>Your IQ is <strong>${prettify(scoreIQ[i].IQ)}</strong>.</p>
+                <p>Your rank is <strong>${i+1}</strong>.</p>
                 `);
-
             }
             $table.append(`<tr>
                 <th> ${i+1} </th>
