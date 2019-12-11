@@ -1,3 +1,4 @@
+
 async function getPlayers() {
     let result = await axios({
         method: 'GET',
@@ -5,7 +6,6 @@ async function getPlayers() {
     });
     return result.data;
 }
-
 
 export const setup = () => {
     let $table = $(".leaderboard");
@@ -44,7 +44,7 @@ export const setup = () => {
                 </tr>`);
             }
         }
-    })
+    });
 
 }
 

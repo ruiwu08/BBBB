@@ -22,6 +22,63 @@
             </div>
         </nav>
         <br>
+
+        <div class="field">
+            <div class="control">
+                <input placeholder="Search for Users" id = "searchbar" class="input" type="text" oninput="get(this.value)"/>
+            </div>
+        </div>
+        <div class="players"></div>
+        <script>
+                async function getPlayers() {
+                    let result = await axios({
+                        method: 'GET',
+                        url: 'http://localhost:3000/public/users/',
+                    });
+                    return result.data;
+                };
+                
+                function get(value) {
+                    debounce(value, 3000);
+                };
+                
+                let timeout;
+                function debounce(value, delay) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(function() {
+                        search(value)}, delay);
+                };
+                
+                function search(value) {
+                    let returns = [];
+                    getPlayers().then(function(data) {
+                        Object.keys(data).forEach(function (key) {
+                            data = data[key];
+                        });
+                        let a = new RegExp(value.split('').join('\\w*').replace(/\W/, ""), 'i');
+                        data.filter(function(person) {
+                            if (person.match(a)) {
+                                returns.push(person);
+                            }
+                        });
+                        $(`.players`).empty();
+                        for (let i = 0; i < returns.length; i++) {
+                            $(`.players`).append(`<p> ${returns[i]} </p>`);
+                        }
+                    });
+                }
+            </script>
+
+        <!--
+            <div>
+            <input onChange= { function(e) {
+                const val2 = e.target.value;
+                debounce( function() {
+                    setVal(val2);
+                } ,500); }}
+            />
+            </div>
+        -->
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <div class="tile is-child notification" id="rank1">
