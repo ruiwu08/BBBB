@@ -24,7 +24,6 @@ async function saveGame(gameState, event) {
     let upgrades = [];
     
     gameState.upgrades.forEach(upgrade => {
-        console.log("HERE");
         let store = {
             name: upgrade.name,
             cost: upgrade.cost,
@@ -76,7 +75,7 @@ async function saveGame(gameState, event) {
             data: {
                 class: gameState.class,
                 lines: gameState.lines,
-                IQ: 0,
+                IQ: gameState.IQ,
             }
         }
     })
@@ -180,6 +179,8 @@ function main() {
             }, 100);
             if (user !== 'user') {
                 $("#login").text("Logout");
+                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+                $('.navbar-start').append(`<a class="navbar-item" href="./class_leaderboard/"> Class Leaderboard </a>`)
             }
             $("#save").on('click', (e) => {
                 saveGame(game, e)
