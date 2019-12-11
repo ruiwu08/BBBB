@@ -22,13 +22,6 @@
             </div>
         </nav>
         <br>
-
-        <div class="field">
-            <div class="control">
-                <input placeholder="Search for Users" id = "searchbar" class="input" type="text" oninput="get(this.value)"/>
-            </div>
-        </div>
-        <div class="players"></div>
         <script>
                 async function getPlayers() {
                     let result = await axios({
@@ -69,53 +62,75 @@
                 }
             </script>
 
-        <!--
-            <div>
-            <input onChange= { function(e) {
-                const val2 = e.target.value;
-                debounce( function() {
-                    setVal(val2);
-                } ,500); }}
-            />
-            </div>
-        -->
         <div class="tile is-ancestor">
-            <div class="tile is-parent">
-                <div class="tile is-child notification" id="rank1">
-                    <p class="title grn">Rank 1</p>
+            <div class="tile is-vertical is-8">
+              <div class="tile">
+                <div class="tile is-parent is-vertical">
+                    <div class="tile is-child notification" id="rank1">
+                        <p class="title grn">Rank 1</p>
+                    </div>
                 </div>
-            </div>
-            <div class="tile is-parent">
-                <div class="tile is-child notification" id="rank2">
-                    <p class="title grn">Rank 2</p>
-                </div>
-            </div>            
-            <div class="tile is-parent">
-                <div class="tile is-child notification" id="rank3">
-                    <p class="title grn">Rank 3</p>
-                </div>
-            </div>  
-        </div>
-        <div class="tile is-ancestor">
-            <div class="tile is-parent">
+                <div class="tile is-parent">
+                    <div class="tile is-child notification" id="rank2">
+                        <p class="title grn">Rank 2</p>
+                    </div>
+                </div>   
+                <div class="tile is-parent">
+                    <div class="tile is-child notification" id="rank3">
+                        <p class="title grn">Rank 3</p>
+                    </div>
+                </div>  
+              </div>
+              <div class="tile is-parent">
                 <div class="tile is-child notification">
                     <table class="table has-text-centered is-hoverable is-fullwidth">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Player</th>
-                                    <th>Overall IQ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="leaderboard">
-                            </tbody>
-                        </table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Overall IQ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="leaderboard">
+                        </tbody>
+                    </table>
                 </div>
+              </div>
             </div>
-        </div>
+            <div class="tile is-parent">
+                <div class="tile is-child notification">
+                    <p class="title grn">Search for Users:</p>
+                    <input
+                        class = "input"
+                        type = "text"
+                    placeholder="ex. Mack N. Tosh"
+                    id = "searchbar"
+                    oninput= "get(this.value)"
+                    />
+                    <div class="players"></div>
+                </div>  
+            </div>
+          </div>
+
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-        <script type = "module" src="leaderboard.js"></script>
+        <script type= "module" src="leaderboard.js"></script>
+        <script>
+            function get(value) {
+                debounce(value, 3000);
+            }
+
+            function search(string) {
+                console.log(string);
+            }
+
+            let timeout;
+            function debounce(value, delay) { 
+                clearTimeout(timeout);
+                timeout = setTimeout(function() { search(value)}, delay);
+                } 
+
+        </script>
     </body>
 </html>
