@@ -23,6 +23,7 @@ export default class Game {
     setClass(newClass) {this.class = newClass;}
 
 
+
     //IQ requirements to pass need heavy rebalancing. Need to be WAYYYYY higher in the later classes.
     passClass() {
         if (this.class == '110') {
@@ -31,6 +32,7 @@ export default class Game {
                 this.setClass('401');
                 this.IQtoPass = 2000
                 this.classBonus = 5;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '401') {
@@ -39,6 +41,7 @@ export default class Game {
                 this.setClass('410');
                 this.classBonus = 18;
                 this.IQtoPass = 50000;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '410') {
@@ -47,6 +50,7 @@ export default class Game {
                 this.setClass('411');
                 this.classBonus = 66.6;
                 this.IQtoPass = 666666;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '411') {
@@ -55,6 +59,7 @@ export default class Game {
                 this.setClass('411-2');
                 this.classBonus = 250;
                 this.IQtoPass = 696969;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '411-2') {
@@ -63,6 +68,7 @@ export default class Game {
                 this.setClass('426');
                 this.classBonus = 700;
                 this.IQtoPass = 100;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '426') {
@@ -71,6 +77,7 @@ export default class Game {
                 this.setClass('455');
                 this.classBonus = 2019;
                 this.IQtoPass = 10000000;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '455') {
@@ -79,6 +86,7 @@ export default class Game {
                 this.setClass('550');
                 this.classBonus = 6969;
                 this.IQtoPass = 550000000;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else if (this.class == '550') {
@@ -87,6 +95,7 @@ export default class Game {
                 this.setClass('550');
                 this.classBonus = 42069;
                 this.IQtoPass = 10000000000000000000000000000000000;
+                window.localStorage.setItem("userClass", this.class);
                 return true;
             }
         } else {

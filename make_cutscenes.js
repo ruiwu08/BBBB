@@ -103,7 +103,7 @@ export default function makeCutscenes(game) {
     let plaisted2 = new Cutscene('Midterm', '455', 555550);
     plaisted2.setTopText("You survived the midterm.");
     plaisted2.setBotText("You're almost done!");
-    plaisted2.setImage();
+    plaisted2.setImage("images/cutscenes/exam.PNG");
     game.cutscenes.push(plaisted2);
     
     let plaisted3 = new Cutscene('Water bottle', '455', 605550);
@@ -122,13 +122,13 @@ export default function makeCutscenes(game) {
     let frahm1 = new Cutscene('Extra Credit Oppurtunity', '550', 7568225);
     frahm1.setTopText("You did the extra credit.");
     frahm1.setBotText("Good job!");
-    frahm1.setImage();
+    frahm1.setImage("images/cutscenes/working_hard.PNG");
     game.cutscenes.push(frahm1);
     
     let frahm2 = new Cutscene('Did you forget something?', '550', 8000092250);
     frahm2.setTopText("You forgot to turn in a homework assignment.");
     frahm2.setBotText("Be more careful next time.");
-    frahm2.setImage();
+    frahm2.setImage("images/cutscenes/confused.PNG");
     game.cutscenes.push(frahm2);
 
     let frahm3 = new Cutscene("Here's some water!", '550', 9875682250);
@@ -146,6 +146,6 @@ export default function makeCutscenes(game) {
     let frahm5 = new Cutscene('last midterm', '550', 99999998855);
     frahm5.setTopText("You survived the first 2.");
     frahm5.setBotText("Knock out the last one!");
-    frahm5.setImage();
+    frahm5.setImage("images/cutscenes/exam.PNG");
     game.cutscenes.push(frahm5);
 };

@@ -4,21 +4,61 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BBBB Leaderboard</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
 
         <!-- Include links to CSS stylesheets below -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+        <link rel="stylesheet" href="../style.css" />
     </head>
 
     <body>
-        
-        
-
+        <div id="header">
+                <h1 class="header">Leaderboard</h1>
+        </div>
+        <nav  class="navbar is-light" role="naviagation" aria-label="main navigation">
+            <div class="navbar-start">
+                <a class="navbar-item" href="../">
+                    Back to Game
+                </a>
+            </div>
+        </nav>
+        <br>
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child notification" id="rank1">
+                    <p class="title grn">Rank 1</p>
+                </div>
+            </div>
+            <div class="tile is-parent">
+                <div class="tile is-child notification" id="rank2">
+                    <p class="title grn">Rank 2</p>
+                </div>
+            </div>            
+            <div class="tile is-parent">
+                <div class="tile is-child notification" id="rank3">
+                    <p class="title grn">Rank 3</p>
+                </div>
+            </div>  
+        </div>
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child notification">
+                    <table class="table has-text-centered is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Player</th>
+                                    <th>Overall IQ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="leaderboard">
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
         <script type = "module" src="leaderboard.js"></script>
-        
-        
-
     </body>
 </html>
