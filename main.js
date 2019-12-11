@@ -9,6 +9,7 @@ import makeCutscenes from './make_cutscenes.js';
 let preRendered = false;
 let showingCutscene = false;
 async function saveGame(gameState, event) {
+    
     event.preventDefault();
     
     if (document.getElementById("delete") == null) {
@@ -19,10 +20,25 @@ async function saveGame(gameState, event) {
     }
     
     let jwt = window.localStorage.getItem('jwt');
-    /*let upgrades = {};
+    
+    let upgrades = [];
+    
     gameState.upgrades.forEach(upgrade => {
-        upgrades[upgrade.name]
-    });*/
+        console.log("HERE");
+        let store = {
+            name: upgrade.name,
+            cost: upgrade.cost,
+            count: upgrade.count,
+            maxPurchases: upgrade.maxPurchases,
+            unlockIQ: upgrade.unlockIQ,
+            type: upgrade.type,
+            increase: upgrade.increase.toString(),
+         
+            costIncrementer: upgrade.costIncrementer.toString(),
+
+        }
+        upgrades.push(store);
+    })
     let user_result = await axios({
         method: 'POST',
         url: 'http://localhost:3000/user/' + gameState.user,
@@ -36,6 +52,8 @@ async function saveGame(gameState, event) {
                 IQtoPass: gameState.IQtoPass,
                 readyToPass: gameState.readyToPass,
                 classBonus: gameState.classBonus,
+                upgrades: upgrades
+                
             }
         }
     });
@@ -116,7 +134,6 @@ function main() {
     } else {
         getGameDetails(user).then(details => {
             game = new Game(user, "password")
-            
             game.lines = details.result.lines;
             game.IQ = details.result.IQ;
             game.lps = details.result.lps;
@@ -124,13 +141,33 @@ function main() {
             game.classBonus = details.result.classBonus;
             game.IQtoPass = details.result.IQtoPass;
             game.readyToPass = details.result.readyToPass;
+            makeUpgrades(game);
+
+            for (let i = 0; i < details.result.upgrades.length; i++) {
+                let curr = details.result.upgrades[i];
+                let actualUpgrade = game.upgrades[i];
+                
+                actualUpgrade.cost = curr.cost;
+                actualUpgrade.count = curr.count;
+                
+
+               // actualUpgrade.costIncrementer = eval(curr.costIncrementer);
+                //actualUpgrade.increase = eval(curr.increase);
+                
+                
+
+               
+            }
+       //     makeUpgrades(game);
+            
+         
             window.localStorage.setItem("userClass", game.class);
             $("#login").text("Change Account Login")
             $("#navbar").prepend(`<div class="navbar-item"> Hello ${user}</div>`)
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
-            makeUpgrades(game);
-            makeCutscenes(game);
+            
+            // makeCutscenes(game);
             renderGame(game);
 
             updateGame(game);
@@ -142,7 +179,7 @@ function main() {
                 updateCutscenes(game);
             }, 100);
             if (user !== 'user') {
-                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+                $("#login").text("Logout");
             }
             $("#save").on('click', (e) => {
                 saveGame(game, e)
@@ -150,13 +187,13 @@ function main() {
             $("#delete").on('click', (e) => {
                 deleteGameHistory(user, e);
             })
-        }).catch(() => {
+        }).catch((err) => {
             game = new Game(user, "password");
             makeUpgrades(game);
             makeCutscenes(game);
             renderGame(game);
             $("#navbar").prepend(`<div> Hello ${user}</div>`);
-            $("#login").text("Change Account Login");
+            $("#login").text("Logout");
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             updateGame(game);
             updateUpgrades(game);
@@ -415,9 +452,9 @@ function renderGame(game) {
 function updateGame(game) {
     //Updates the DOM with the game state info.
     //*May be redundant with renderGame function. Design is dependent on front-end team.
-    $("#lines").text("Lines: " + prettify(game.lines));
-    $('#IQ').text("IQ: " + prettify(game.IQ));
-    $("#lps").text("Lines per second: " + prettify(game.lps));
+    $("#lines").text("Lines: " + prettifyLines(game.lines));
+    $('#IQ').text("IQ: " + prettifyIQ(game.IQ));
+    $("#lps").text("Lines per second: " + prettifyLines(game.lps));
     if (game.IQ >= game.IQtoPass) {
         $('#pass_button').css('visibility', 'visible');
     }
@@ -478,5 +515,24 @@ function prettify(num) {
         return num;
     }
 }
+
+function prettifyIQ(num) {
+    if (num < 100) {
+        return num.toFixed(2)
+    } else if (num >= 100 && num < 1000) {
+        return num.toFixed(1);
+    } else {
+        return prettify(num);
+    }
+}
+
+function prettifyLines(num) {
+    if (num < 100) {
+        return num.toFixed(1);
+    } else {
+        return prettify(num);
+    }
+}
+
 
 main()
