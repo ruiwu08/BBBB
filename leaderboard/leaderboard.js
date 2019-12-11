@@ -13,6 +13,7 @@ export const setup = () => {
     getPlayers().then(function(data) {
         Object.keys(data).forEach(function (key) {
             data = data[key];
+            console.log(data)
         });
 
         let scoreIQ = [];
