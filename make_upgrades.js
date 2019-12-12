@@ -88,4 +88,113 @@ export default function makeUpgrades(game) {
     typewriter.setInfo("Each click generates 20 more lines");
     typewriter.setImage("images/upgrades/typewriter.jpg");
     game.addUpgrade(typewriter);
+
+    //////////////////////////////////////////////
+
+    let smartfridge = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let guccifridge = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let scandal = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let blackmail = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let dialup = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let dsl = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let fiber = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let screens = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let fivehour = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let twentyhour = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let water = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let tape = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    let toothpaste = new Upgrade('Typewriter', 8000, 15, 10, 'CLICK');
+    typewriter.setCostIncrementer(function(cost) {return cost * 1.3});
+    typewriter.setIncrease(function(count) {return count * 20});
+    typewriter.setDescription("Your mom must be real proud to raise you into the kind of person who sits in coffeeshops in a turtleneck and beanie while coding on a typewriter.");
+    typewriter.setInfo("Each click generates 20 more lines");
+    typewriter.setImage("images/upgrades/typewriter.jpg");
+    game.addUpgrade(typewriter);
+
+    
+    
 }
