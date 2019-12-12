@@ -448,6 +448,8 @@ function renderGame(game) {
             type_img.mouseup(function () { type_img.attr("src", "images/other/Coding.png") })
             var x = 0;
             click_img.click(function(e) {
+                var audio = new Audio('audio/slap.mp3');
+                audio.play();
                 x++;
                 click_img.append(`<div id="x${x}" hidden>+${game.cps}</div>`);
                 $("#x"+x).css("top", e.clientY);
@@ -460,7 +462,7 @@ function renderGame(game) {
                 $("#x"+x).css("animation", "GoUp 2s forwards linear");
                 $("#x"+x).show();
 
-                setTimeout(function() {$("#x"+x).remove()}, 1000)
+                // setTimeout(function() {$("#x"+x).remove()}, 1000)
             });
         });
         preRendered = true;
