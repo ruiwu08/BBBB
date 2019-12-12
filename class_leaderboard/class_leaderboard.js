@@ -35,21 +35,34 @@ export const setup = () => {
         for(let i = 0; i < scoreIQ.length; i++) {
             if(scoreIQ[i].user == user) {
                 $(`#user_rank`).append(`<p>You are <strong>${scoreIQ[i].user}</strong>.</p>
-                <p>You have <strong>${prettify(scoreIQ[i].lines)} lines</strong>.</p>
-                <p>Your IQ is <strong>${prettify(scoreIQ[i].IQ)}</strong>.</p>
-                <p>Your rank is <strong>${i+1}</strong>.</p>
+                <p>You have <strong>${prettifyLines(scoreIQ[i].lines)} lines</strong>.</p>
+                <p>Your IQ is <strong>${prettifyIQ(scoreIQ[i].IQ)}</strong>.</p>
+                <p>Your rank is <strong>${i+1}</strong>.</p><br>
                 `);
+                $(`#user_rank`).append(`<p>${specialMessage(i+1)}</p>`);
             }
             $table.append(`<tr>
                 <th> ${i+1} </th>
                 <td> ${scoreIQ[i].user} </td>
-                <td> ${prettify(scoreIQ[i].lines)} </td>
-                <td> ${prettify(scoreIQ[i].IQ)} </td>
+                <td> ${prettifyLines(scoreIQ[i].lines)} </td>
+                <td> ${prettifyIQ(scoreIQ[i].IQ)} </td>
             </tr>`)
         }
     })
     renderClass(userClass);
 
+}
+
+function specialMessage(rank) {
+    let message;
+    if (rank == 1) {
+        message = `Congrats!`;
+    } else if (rank == 2 || rank == 3) {
+        message = `Almost there. Keep clicking!`;
+    } else {
+        message = `You're a loser. Keep clicking to get into the top 3.`;
+    }
+    return message;
 }
 
 function renderClass(userClass) {
@@ -119,6 +132,24 @@ function prettify(num) {
         return (num / (10 ** 18)).toFixed(1) + " quintillion";
     } else {
         return num;
+    }
+}
+
+function prettifyLines(num) {
+    if (num < 100) {
+        return num.toFixed(1);
+    } else {
+        return prettify(num);
+    }
+}
+
+function prettifyIQ(num) {
+    if (num < 100) {
+        return num.toFixed(2)
+    } else if (num >= 100 && num < 1000) {
+        return num.toFixed(1);
+    } else {
+        return prettify(num);
     }
 }
 
