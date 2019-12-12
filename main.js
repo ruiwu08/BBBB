@@ -448,8 +448,6 @@ function renderGame(game) {
             type_img.mouseup(function () { type_img.attr("src", "images/other/Coding.png") })
             var x = 0;
             click_img.click(function(e) {
-                var audio = new Audio('audio_file.mp3');
-                audio.play();
                 x++;
                 click_img.append(`<div id="x${x}" hidden>+${game.cps}</div>`);
                 $("#x"+x).css("top", e.clientY);
