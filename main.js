@@ -181,7 +181,6 @@ function main() {
                 deleteGameHistory(user, e);
             })
         }).catch((err) => {
-            alert(err);
             game = new Game(user, "password");
             makeUpgrades(game);
             makeCutscenes(game);
