@@ -557,6 +557,21 @@ function prettifyLines(num) {
     }
 }
 
+function soundPicker() {
+    let loc = "";
+    let standardSound = [];
+    let uncommonSound = [];
+    let secretSound = [];
+
+    let num = Math.random()
+    if (num < 0.75){
+        return standardSound[Math.floor(Math.random()*standardSound.length)];
+    } else if (num >= 0.75 && num < 0.99) {
+        return uncommonSound[Math.floor(Math.random()*uncommonSound.length)];
+    } else {
+        return secretSound[Math.floor(Math.random()*secretSound.length)];
+    }
+}
 
 
 main()
