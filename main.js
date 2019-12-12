@@ -148,20 +148,13 @@ function main() {
                 
                 actualUpgrade.cost = curr.cost;
                 actualUpgrade.count = curr.count;
-                
-
                // actualUpgrade.costIncrementer = eval(curr.costIncrementer);
                 //actualUpgrade.increase = eval(curr.increase);
-                
-                
-
-               
             }
        //     makeUpgrades(game);
             
          
             window.localStorage.setItem("userClass", game.class);
-            $("#login").text("Change Account Login")
             $("#navbar").prepend(`<div class="navbar-item"> Hello ${user}</div>`)
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
@@ -179,7 +172,7 @@ function main() {
             }, 100);
             if (user !== 'user') {
                 $("#login").text("Logout");
-                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+            
                 $('.navbar-start').append(`<a class="navbar-item" href="./class_leaderboard/"> Class Leaderboard </a>`)
             }
             $("#save").on('click', (e) => {
@@ -206,7 +199,7 @@ function main() {
                 updateCutscenes(game);
             }, 100);
             if (user !== 'user') {
-                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+                $("#login").replaceWith('<div class="button is-light" id = "login">Logout</div>');
                 $('.navbar-start').append(`<a class="navbar-item" href="./class_leaderboard/"> Class Leaderboard </a>`)
             }
             $("#save").on('click', (e) => {
