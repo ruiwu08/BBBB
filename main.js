@@ -64,7 +64,7 @@ async function saveGame(gameState, event) {
         data: {
             data: {
                 // Change when an overall IQ is figured out
-                overallIQ: gameState.overallIQ,
+                overallIQ: gameState.totalIQ,
             }
         }
     })
@@ -181,7 +181,6 @@ function main() {
                 deleteGameHistory(user, e);
             })
         }).catch((err) => {
-            alert(err);
             game = new Game(user, "password");
             makeUpgrades(game);
             makeCutscenes(game);
