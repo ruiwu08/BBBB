@@ -561,9 +561,13 @@ function soundPicker() {
     uncommonSound.push("audio/metal.mp3");
     uncommonSound.push("audio/minecraft.mp3");
     uncommonSound.push("audio/banana_slap.mp3");
+    uncommonSound.push("audio/hmmmm.mp3");
     let secretSound = [];
     secretSound.push("audio/pterodactyl.mp3");
     secretSound.push("audio/wilhelm.mp3");
+    secretSound.push("audio/oh-my-god-vine.mp3");
+    secretSound.push("audio/hallel.mp3");
+    secretSound.push("audio/sinister.mp3");
     let num = Math.random()
     if (num < 0.75){
         return standardSound[Math.floor(Math.random()*standardSound.length)];
