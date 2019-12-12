@@ -52,8 +52,8 @@ export const handleCreateOption = (event) => {
 export const handleCreate = (event) => {
     event.preventDefault();
     
-    let password = $(event.target).prev().val();
-    let user = $(event.target).prev().prev().val();
+    let password = $("#pass").val();
+    let user = $("#user").val();
     
     
     createAccount(user, password).then(() => {
@@ -66,13 +66,11 @@ export const handleCreate = (event) => {
 }
 export const handleLogin = (event) => {
     event.preventDefault();
-    let password = $(event.target).prev().val();
-    let user = $(event.target).prev().prev().val();
-    
+    let user = $("#user").val();
+    let password = $("#pass").val()
     login(user, password).then((response) => {
         window.localStorage.setItem("currentUser", user)
         window.localStorage.setItem("jwt", response.data.jwt)
-        
         window.location.href = window.location.href.replace("/login", "");
     }).catch(err => alert("There was an error logging you in"));
 }

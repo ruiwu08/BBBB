@@ -148,20 +148,13 @@ function main() {
                 
                 actualUpgrade.cost = curr.cost;
                 actualUpgrade.count = curr.count;
-                
-
-               // actualUpgrade.costIncrementer = eval(curr.costIncrementer);
-                //actualUpgrade.increase = eval(curr.increase);
-                
-                
-
-               
+                actualUpgrade.costIncrementer = eval(curr.costIncrementer);
+                actualUpgrade.increase = eval(curr.increase);
             }
        //     makeUpgrades(game);
             
          
             window.localStorage.setItem("userClass", game.class);
-            $("#login").text("Change Account Login")
             $("#navbar").prepend(`<div class="navbar-item"> Hello ${user}</div>`)
             $("#navbar").append(`<div class="button has-background-success" id = "save">Save Game</div>`)
             $("#navbar").append(`<div class = "button has-background-danger" id = "delete">Delete Game Progress</div>`)
@@ -179,7 +172,7 @@ function main() {
             }, 100);
             if (user !== 'user') {
                 $("#login").text("Logout");
-                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+            
                 $('.navbar-start').append(`<a class="navbar-item" href="./class_leaderboard/"> Class Leaderboard </a>`)
             }
             $("#save").on('click', (e) => {
@@ -206,7 +199,7 @@ function main() {
                 updateCutscenes(game);
             }, 100);
             if (user !== 'user') {
-                $("#login").replaceWith('<div class="button is-light" id = "logout">Logout</div>');
+                $("#login").text("Logout")
                 $('.navbar-start').append(`<a class="navbar-item" href="./class_leaderboard/"> Class Leaderboard </a>`)
             }
             $("#save").on('click', (e) => {
@@ -558,16 +551,19 @@ function prettifyLines(num) {
 }
 
 function soundPicker() {
-    let loc = "";
     let standardSound = [];
     standardSound.push("audio/slap.mp3");
     let uncommonSound = [];
+    uncommonSound.push("door_close.mp3");
     uncommonSound.push("audio/gavel.mp3");
+    uncommonSound.push("wooden_floor.mp3");
     uncommonSound.push("audio/roblox.mp3");
+    uncommonSound.push("audio/metal.mp3");
+    uncommonSound.push("audio/minecraft.mp3");
+    uncommonSound.push("audio/banana_slap.mp3");
     let secretSound = [];
     secretSound.push("audio/pterodactyl.mp3");
-    secretSound.push("audio/sinister.mp3");
-
+    secretSound.push("audio/wilhelm.mp3");
     let num = Math.random()
     if (num < 0.75){
         return standardSound[Math.floor(Math.random()*standardSound.length)];
