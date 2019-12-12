@@ -566,6 +566,7 @@ function soundPicker() {
     uncommonSound.push("audio/roblox.mp3");
     let secretSound = [];
     secretSound.push("audio/pterodactyl.mp3");
+    secretSound.push("audio/sinister.mp3");
 
     let num = Math.random()
     if (num < 0.75){
