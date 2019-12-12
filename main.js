@@ -64,7 +64,7 @@ async function saveGame(gameState, event) {
         data: {
             data: {
                 // Change when an overall IQ is figured out
-                overallIQ: gameState.overallIQ,
+                overallIQ: gameState.totalIQ,
             }
         }
     })
