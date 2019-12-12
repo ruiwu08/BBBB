@@ -148,8 +148,8 @@ function main() {
                 
                 actualUpgrade.cost = curr.cost;
                 actualUpgrade.count = curr.count;
-               // actualUpgrade.costIncrementer = eval(curr.costIncrementer);
-                //actualUpgrade.increase = eval(curr.increase);
+                actualUpgrade.costIncrementer = eval(curr.costIncrementer);
+                actualUpgrade.increase = eval(curr.increase);
             }
        //     makeUpgrades(game);
             
@@ -199,7 +199,7 @@ function main() {
                 updateCutscenes(game);
             }, 100);
             if (user !== 'user') {
-                $("#login").replaceWith('<div class="button is-light" id = "login">Logout</div>');
+                $("#login").text("Logout")
                 $('.navbar-start').append(`<a class="navbar-item" href="./class_leaderboard/"> Class Leaderboard </a>`)
             }
             $("#save").on('click', (e) => {
