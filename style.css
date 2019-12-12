@@ -179,11 +179,11 @@
 
 @keyframes GoUp {
   0% {
-    color: green;
+    color: greenyellow;
     opacity: 1;
   }
   100% {
-    color: green;
+    color: greenyellow;
     top: 0px;
     opacity: 0;
   }
