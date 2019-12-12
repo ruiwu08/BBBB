@@ -22,43 +22,115 @@
             </div>
         </nav>
         <br>
+        <script>
+                async function getPlayers() {
+                    let result = await axios({
+                        method: 'GET',
+                        url: 'http://localhost:3000/public/users/',
+                    });
+                    return result.data;
+                };
+                
+                function get(value) {
+                    debounce(value, 3000);
+                };
+                
+                let timeout;
+                function debounce(value, delay) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(function() {
+                        search(value)}, delay);
+                };
+                
+                function search(value) {
+                    let returns = [];
+                    getPlayers().then(function(data) {
+                        Object.keys(data).forEach(function (key) {
+                            data = data[key];
+                        });
+                        let a = new RegExp(value.split('').join('\\w*').replace(/\W/, ""), 'i');
+                        data.filter(function(person) {
+                            if (person.match(a)) {
+                                returns.push(person);
+                            }
+                        });
+                        $(`.players`).empty();
+                        for (let i = 0; i < returns.length; i++) {
+                            $(`.players`).append(`<p> ${returns[i]} </p>`);
+                        }
+                    });
+                }
+            </script>
+
         <div class="tile is-ancestor">
-            <div class="tile is-parent">
-                <div class="tile is-child notification" id="rank1">
-                    <p class="title grn">Rank 1</p>
+            <div class="tile is-vertical is-8">
+              <div class="tile">
+                <div class="tile is-parent is-vertical">
+                    <div class="tile is-child notification" id="rank1">
+                        <p class="title grn">Rank 1</p>
+                    </div>
                 </div>
-            </div>
-            <div class="tile is-parent">
-                <div class="tile is-child notification" id="rank2">
-                    <p class="title grn">Rank 2</p>
-                </div>
-            </div>            
-            <div class="tile is-parent">
-                <div class="tile is-child notification" id="rank3">
-                    <p class="title grn">Rank 3</p>
-                </div>
-            </div>  
-        </div>
-        <div class="tile is-ancestor">
-            <div class="tile is-parent">
+                <div class="tile is-parent">
+                    <div class="tile is-child notification" id="rank2">
+                        <p class="title grn">Rank 2</p>
+                    </div>
+                </div>   
+                <div class="tile is-parent">
+                    <div class="tile is-child notification" id="rank3">
+                        <p class="title grn">Rank 3</p>
+                    </div>
+                </div>  
+              </div>
+              <div class="tile is-parent">
                 <div class="tile is-child notification">
                     <table class="table has-text-centered is-hoverable is-fullwidth">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Player</th>
-                                    <th>Overall IQ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="leaderboard">
-                            </tbody>
-                        </table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Overall IQ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="leaderboard">
+                        </tbody>
+                    </table>
                 </div>
+              </div>
             </div>
-        </div>
+            <div class="tile is-parent">
+                <div class="tile is-child notification">
+                    <p class="title grn">Search for Users:</p>
+                    <input
+                        class = "input"
+                        type = "text"
+                    placeholder="ex. Mack N. Tosh"
+                    id = "searchbar"
+                    oninput= "get(this.value)"
+                    />
+                    <div class="players"></div>
+                </div>  
+            </div>
+          </div>
+
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-        <script type = "module" src="leaderboard.js"></script>
+        <script type= "module" src="leaderboard.js"></script>
+        <script>
+            function get(value) {
+                debounce(value, 3000);
+            }
+
+            function search(string) {
+                console.log(string);
+            }
+
+            let timeout;
+            function debounce(value, delay) { 
+                clearTimeout(timeout);
+                timeout = setTimeout(function() { search(value)}, delay);
+                } 
+
+        </script>
     </body>
 </html>
