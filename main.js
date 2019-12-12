@@ -148,10 +148,7 @@ function main() {
                 
                 actualUpgrade.cost = curr.cost;
                 actualUpgrade.count = curr.count;
-                actualUpgrade.costIncrementer = eval(curr.costIncrementer);
-                actualUpgrade.increase = eval(curr.increase);
             }
-       //     makeUpgrades(game);
             
          
             window.localStorage.setItem("userClass", game.class);
@@ -182,6 +179,7 @@ function main() {
                 deleteGameHistory(user, e);
             })
         }).catch((err) => {
+            alert(err);
             game = new Game(user, "password");
             makeUpgrades(game);
             makeCutscenes(game);
