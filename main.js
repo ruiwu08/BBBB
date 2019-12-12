@@ -441,7 +441,7 @@ function renderGame(game) {
             type_img.mouseup(function () { type_img.attr("src", "images/other/Coding.png") })
             var x = 0;
             click_img.click(function(e) {
-                var audio = new Audio('audio_file.mp3');
+                var audio = new Audio(soundPicker());
                 audio.play();
                 x++;
                 click_img.append(`<div id="x${x}" hidden>+${game.cps}</div>`);
@@ -455,7 +455,7 @@ function renderGame(game) {
                 $("#x"+x).css("animation", "GoUp 2s forwards linear");
                 $("#x"+x).show();
 
-                setTimeout(function() {$("#x"+x).remove()}, 1000)
+                // setTimeout(function() {$("#x"+x).remove()}, 1000)
             });
         });
         preRendered = true;
@@ -550,6 +550,25 @@ function prettifyLines(num) {
     }
 }
 
+function soundPicker() {
+    let loc = "";
+    let standardSound = [];
+    standardSound.push("audio/slap.mp3");
+    let uncommonSound = [];
+    uncommonSound.push("audio/gavel.mp3");
+    uncommonSound.push("audio/roblox.mp3");
+    let secretSound = [];
+    secretSound.push("audio/pterodactyl.mp3");
+
+    let num = Math.random()
+    if (num < 0.75){
+        return standardSound[Math.floor(Math.random()*standardSound.length)];
+    } else if (num >= 0.75 && num < 0.99) {
+        return uncommonSound[Math.floor(Math.random()*uncommonSound.length)];
+    } else {
+        return secretSound[Math.floor(Math.random()*secretSound.length)];
+    }
+}
 
 
 main()
