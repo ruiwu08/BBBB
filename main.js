@@ -47,6 +47,7 @@ async function saveGame(gameState, event) {
                 lines: gameState.lines,
                 IQ: gameState.IQ,
                 lps: gameState.lps,
+                overallIQ: gameState.totalIQ,
                 class: gameState.class,
                 IQtoPass: gameState.IQtoPass,
                 readyToPass: gameState.readyToPass,
@@ -140,6 +141,7 @@ function main() {
             game.classBonus = details.result.classBonus;
             game.IQtoPass = details.result.IQtoPass;
             game.readyToPass = details.result.readyToPass;
+            game.overallIQ = details.result.overallIQ;
             makeUpgrades(game);
 
             for (let i = 0; i < details.result.upgrades.length; i++) {
