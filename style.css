@@ -176,3 +176,15 @@
 .img {
   border-radius: 10px;
 }
+
+@keyframes GoUp {
+  0% {
+    color: green;
+    opacity: 1;
+  }
+  100% {
+    color: green;
+    top: 0px;
+    opacity: 0;
+  }
+}

@@ -11,6 +11,7 @@ export default class Game {
         this.upgrades = [];
         this.cutscenes = [];
         this.lps = 0;
+        this.cps = 0;
         this.class = '110';
         this.IQtoPass = 100;
         this.readyToPass = false;
@@ -205,6 +206,7 @@ export default class Game {
         }
         this.lines = this.lines + (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier * this.classBonus);
         this.IQ = this.IQ + (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier * this.classBonus)/1000;
+        this.cps = (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier * this.classBonus);
     }
 
 }

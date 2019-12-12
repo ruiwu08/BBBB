@@ -438,6 +438,7 @@ function renderGame(game) {
     renderClass(game);
     //Renders the DOM with the game state info.
     let type_img = $("#coder");
+    let click_img = $("#line_icon");
     type_img.attr("src", "images/other/Coding.png");
     if (!preRendered) {
         renderCutscenes(game);
@@ -445,6 +446,24 @@ function renderGame(game) {
             type_img.mousedown(function () { type_img.attr("src", "images/other/CodingSAd.png") });
             type_img.click(function () { game.onClick() });
             type_img.mouseup(function () { type_img.attr("src", "images/other/Coding.png") })
+            var x = 0;
+            click_img.click(function(e) {
+                var audio = new Audio('audio_file.mp3');
+                audio.play();
+                x++;
+                click_img.append(`<div id="x${x}" hidden>+${game.cps}</div>`);
+                $("#x"+x).css("top", e.clientY);
+                $("#x"+x).css("left", e.clientX - 10);
+                $("#x"+x).css("position", "absolute");
+                $("#x"+x).css("width", "25px");
+                $("#x"+x).css("height", "25px");
+                $("#x"+x).css("color", "white");
+                $("#x"+x).css("font-weight", "bold");
+                $("#x"+x).css("animation", "GoUp 2s forwards linear");
+                $("#x"+x).show();
+
+                setTimeout(function() {$("#x"+x).remove()}, 1000)
+            });
         });
         preRendered = true;
     }
@@ -537,6 +556,7 @@ function prettifyLines(num) {
         return prettify(num);
     }
 }
+
 
 
 main()
