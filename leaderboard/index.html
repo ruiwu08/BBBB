@@ -30,9 +30,21 @@
                     });
                     return result.data;
                 };
+
+                async function getPlayer(player) {
+                    let result = await axios({
+                        method: 'GET',
+                        url: `http://localhost:3000/public/users/${player}`,
+                    });
+                    return result.data;
+                };
                 
                 function get(value) {
-                    debounce(value, 3000);
+                    if (value == "") {
+                        $(`.players`).empty();
+                    } else {
+                        debounce(value, 1500);
+                    }
                 };
                 
                 let timeout;
@@ -54,11 +66,53 @@
                                 returns.push(person);
                             }
                         });
+
                         $(`.players`).empty();
+
                         for (let i = 0; i < returns.length; i++) {
-                            $(`.players`).append(`<p> ${returns[i]} </p>`);
+                            $(`.players`).append(`<br><div class="box">
+                                <div class="media-content">
+                                    <div class="content" id="iq${returns[i]}">
+                                        <p><strong>${returns[i]} </strong></p>
+                                    </div>
+                                </div>
+                            </div>`);
+
+                            getPlayer(returns[i]).then(function(data) {
+                                Object.keys(data).forEach(function (key) {
+                                    data = data[key];
+                                });
+                                $(`#iq${returns[i]}`).append(`<small><strong>Overall IQ: </strong>${prettifyIQ(data.overallIQ)}</small>`);
+                            });
                         }
                     });
+                }
+                function prettify(num) {
+                    if (num < 10 ** 6) {
+                        return num.toFixed(0);
+                    } else if (num >= 10 ** 6 && num < 10 ** 9) {
+                        return (num / (10 ** 6)).toFixed(1) + " million";
+                    } else if (num >= 10 ** 9 && num < 10 ** 12) {
+                        return (num / (10 ** 9)).toFixed(1) + " billion";
+                    } else if (num >= 10 ** 12 && num < 10 ** 15) {
+                        return (num / (10 ** 12)).toFixed(1) + " trillion";
+                    } else if (num >= 10 ** 15 && num < 10 ** 18) {
+                        return (num / (10 ** 15)).toFixed(1) + " quadrillion";
+                    } else if (num >= 10 ** 18 && num < 10 ** 21) {
+                        return (num / (10 ** 18)).toFixed(1) + " quintillion";
+                    } else {
+                        return num;
+                    }
+                }
+
+                function prettifyIQ(num) {
+                    if (num < 100) {
+                        return num.toFixed(2)
+                    } else if (num >= 100 && num < 1000) {
+                        return num.toFixed(1);
+                    } else {
+                        return prettify(num);
+                    }
                 }
             </script>
 
@@ -116,21 +170,5 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
         <script type= "module" src="leaderboard.js"></script>
-        <script>
-            function get(value) {
-                debounce(value, 3000);
-            }
-
-            function search(string) {
-                console.log(string);
-            }
-
-            let timeout;
-            function debounce(value, delay) { 
-                clearTimeout(timeout);
-                timeout = setTimeout(function() { search(value)}, delay);
-                } 
-
-        </script>
     </body>
 </html>

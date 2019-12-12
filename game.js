@@ -16,6 +16,8 @@ export default class Game {
         this.IQtoPass = 100;
         this.readyToPass = false;
         this.classBonus = 1;
+        this.totalIQ = 0;
+        this.totalLines = 0;
 
     }
 
@@ -178,6 +180,7 @@ export default class Game {
         this.lines = this.lines + (tickAmount * tickMultiplier * tickPercentage * allPercentage * allMultiplier * this.classBonus);
         this.IQ = this.IQ + (tickAmount * tickMultiplier * tickPercentage * allPercentage * allMultiplier * this.classBonus)/1000;
         this.lps = (tickAmount * tickMultiplier * tickPercentage * allPercentage * allMultiplier * this.classBonus) * 10;
+        this.totalLines = this.totalLines + this.lps;
     }
 
     onClick() {
@@ -207,6 +210,7 @@ export default class Game {
         this.lines = this.lines + (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier * this.classBonus);
         this.IQ = this.IQ + (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier * this.classBonus)/1000;
         this.cps = (clickAmount * clickMultiplier * clickPercentage * allPercentage * allMultiplier * this.classBonus);
+        this.totalIQ = this.totalIQ + this.cps;
     }
 
 }
