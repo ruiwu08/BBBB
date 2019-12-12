@@ -13,7 +13,6 @@ export const setup = () => {
     getPlayers().then(function(data) {
         Object.keys(data).forEach(function (key) {
             data = data[key];
-            console.log(data)
         });
 
         let scoreIQ = [];
@@ -29,18 +28,18 @@ export const setup = () => {
         for(let i = 0; i < scoreIQ.length; i++) {
             if(i == 0) {
                 $(`#rank1`).append(`<p> <strong>Player:</strong> ${scoreIQ[i].user} </p>
-                    <p> <strong>Overall IQ:</strong> ${prettify(scoreIQ[i].overallIQ)} </p>`);
+                    <p> <strong>Overall IQ:</strong> ${prettifyIQ(scoreIQ[i].overallIQ)} </p>`);
             } else if(i == 1) {
                 $(`#rank2`).append(`<p> <strong>Player:</strong> ${scoreIQ[i].user} </p>
-                    <p> <strong>Overall IQ:</strong> ${prettify(scoreIQ[i].overallIQ)} </p>`);
+                    <p> <strong>Overall IQ:</strong> ${prettifyIQ(scoreIQ[i].overallIQ)} </p>`);
             } else if (i == 2) {
                 $(`#rank3`).append(`<p> <strong>Player:</strong> ${scoreIQ[i].user} </p>
-                    <p> <strong>Overall IQ:</strong> ${prettify(scoreIQ[i].overallIQ)} </p>`);
+                    <p> <strong>Overall IQ:</strong> ${prettifyIQ(scoreIQ[i].overallIQ)} </p>`);
             } else {
                 $table.append(`<tr>
                     <th> ${i+1} </th>
                     <td> ${scoreIQ[i].user} </td>
-                    <td> ${prettify(scoreIQ[i].overallIQ)} </td>
+                    <td> ${prettifyIQ(scoreIQ[i].overallIQ)} </td>
                 </tr>`);
             }
         }
@@ -63,6 +62,16 @@ function prettify(num) {
         return (num / (10 ** 18)).toFixed(1) + " quintillion";
     } else {
         return num;
+    }
+}
+
+function prettifyIQ(num) {
+    if (num < 100) {
+        return num.toFixed(2)
+    } else if (num >= 100 && num < 1000) {
+        return num.toFixed(1);
+    } else {
+        return prettify(num);
     }
 }
 
